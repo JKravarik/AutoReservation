@@ -1,0 +1,29 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "C:\\Users\\jana_\\OneDrive\\HSR\\Semester 3\\MsTe\\99_Miniprojekt\\Vorgabe\\AutoReservation.Common\\AutoReservation.Common.csproj",
+    "projectName": "AutoReservation.Common",
+    "projectPath": "C:\\Users\\jana_\\OneDrive\\HSR\\Semester 3\\MsTe\\99_Miniprojekt\\Vorgabe\\AutoReservation.Common\\AutoReservation.Common.csproj",
+    "outputPath": "C:\\Users\\jana_\\OneDrive\\HSR\\Semester 3\\MsTe\\99_Miniprojekt\\Vorgabe\\AutoReservation.Common\\obj\\",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "net471"
+    ],
+    "frameworks": {
+      "net471": {
+        "projectReferences": {}
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "net471": {}
+  }
+}
