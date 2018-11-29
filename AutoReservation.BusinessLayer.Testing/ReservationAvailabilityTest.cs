@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoReservation.Dal.Entities;
 using AutoReservation.TestEnvironment;
 using Xunit;
 
@@ -22,7 +23,18 @@ namespace AutoReservation.BusinessLayer.Testing
         [Fact]
         public void ScenarioOkay01Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation first = new Reservation
+            {
+                Von = DateTime.Now,
+                Bis = DateTime.Now.Add(new TimeSpan(1))
+            };
+
+            Reservation second = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(2)),
+                Bis = DateTime.Now.Add(new TimeSpan(3))
+            };
+            Assert.False(Target.AreOverlapping(first, second));
         }
 
         [Fact]

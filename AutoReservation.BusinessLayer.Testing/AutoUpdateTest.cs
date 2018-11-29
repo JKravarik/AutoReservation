@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using AutoReservation.Dal.Entities;
 using AutoReservation.TestEnvironment;
 using Xunit;
 
@@ -13,7 +15,13 @@ namespace AutoReservation.BusinessLayer.Testing
         [Fact]
         public void UpdateAutoTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Auto auto = Target.List.First();
+            auto.Marke = "BMW";
+            Target.Update(auto);
+
+            var newAuto = Target.GetById(auto.Id);
+
+            Assert.Equal(auto.Marke, newAuto.Marke);
         }
     }
 }

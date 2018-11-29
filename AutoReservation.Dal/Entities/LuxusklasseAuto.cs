@@ -12,14 +12,14 @@ namespace AutoReservation.Dal.Entities
 
         public LuxusklasseAuto() { }
 
-        public LuxusklasseAuto(int id, string marke, int tagestarif,int basistarif, DateTime rowVersion)
+        public LuxusklasseAuto(int id, string marke, int tagestarif,int basistarif, byte[] rowVersion)
             : base(id, marke, tagestarif, rowVersion)
         {
             this.Basistarif = basistarif;
         }
 
         public LuxusklasseAuto(int id, string marke, int tagestarif, int basistarif)
-            : this(id, marke, tagestarif,basistarif, new DateTime())
+            : this(id, marke, tagestarif,basistarif, new byte[0] )
         {
 
         }

@@ -9,6 +9,11 @@ namespace AutoReservation.Common.Interfaces
         List<Kunde> KundenListe();
         List<Reservation> ReservationenListe();
 
+        List<Auto> AutoListeWhereReservation(Reservation reservation);
+        List<Kunde> KundenListeWhereReservation(Reservation reservation);
+        List<Reservation> ReservationenListeWhereKunde(Kunde kunde);
+        List<Reservation> ReservationenListeWhereAuto(Auto auto);
+
         void UpdateAuto(Auto auto);
         void UpdateKunde(Kunde kunde);
         void UpdateReservation(Reservation reservation);

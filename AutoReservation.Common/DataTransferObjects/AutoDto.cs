@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AutoReservation.Common.DataTransferObjects
 {
@@ -8,7 +9,9 @@ namespace AutoReservation.Common.DataTransferObjects
         public string Marke { get; set; }
         public int Tagestarif { get; set; }
         public int Basistarif { get; set; }
-        public DateTime RowVersion { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
         public AutoKlasse AutoKlasse { get; set; }
 
         public override string ToString()

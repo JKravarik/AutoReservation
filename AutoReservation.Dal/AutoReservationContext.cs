@@ -16,11 +16,23 @@ namespace AutoReservation.Dal
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Auto>()
-                .ToTable("Auto", schema: "dbo");
+                .ToTable("Auto", schema: "dbo")
+                .HasDiscriminator<int>("AutoType")
+                .HasValue<StandardAuto>(0)
+                .HasValue<MittelklasseAuto>(1)
+                .HasValue<LuxusklasseAuto>(2);
+            modelBuilder.Entity<Auto>()
+                .HasKey(a => a.Id);
+
             modelBuilder.Entity<Kunde>()
                 .ToTable("Kunde", schema: "dbo");
+            modelBuilder.Entity<Kunde>()
+                .HasKey(k => k.Id);
+
             modelBuilder.Entity<Reservation>()
                 .ToTable("Reservation", schema: "dbo");
+            modelBuilder.Entity<Reservation>()
+                .HasKey(r => r.ReservationsNr);
         }
 
         public static readonly LoggerFactory LoggerFactory = new LoggerFactory(
@@ -35,20 +47,7 @@ namespace AutoReservation.Dal
                     .EnableSensitiveDataLogging()
                     .UseLoggerFactory(LoggerFactory) // Warning: Do not create a new ILoggerFactory instance each time
                     .UseSqlServer(ConfigurationManager.ConnectionStrings[nameof(AutoReservationContext)].ConnectionString);
-            }
+            }            
         }
-
-        //public void Add(Auto auto)
-        //{
-        //    Autos.Add(auto);
-        //}
-        //public void Add(Kunde kunde)
-        //{
-        //    Kunden.Add(kunde);
-        //}
-        //public void Add(Reservation reservation)
-        //{
-        //    Reservationen.Add(reservation);
-        //}
     }
 }

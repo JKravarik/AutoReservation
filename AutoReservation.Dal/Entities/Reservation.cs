@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AutoReservation.Dal.Entities
 {
@@ -12,11 +13,13 @@ namespace AutoReservation.Dal.Entities
         public DateTime Bis { get; set; }
         public int AutoId { get; set; }
         public int KundeId { get; set; }
-        public DateTime RowVersion { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
 
         public Reservation() { }
 
-        public Reservation(int reservationNr, DateTime von, DateTime bis, int autoId, int kundenId, DateTime rowversion)
+        public Reservation(int reservationNr, DateTime von, DateTime bis, int autoId, int kundenId, byte[] rowversion)
             : this(reservationNr, von, bis, autoId, kundenId)
         {
             this.RowVersion = rowversion;

@@ -21,15 +21,44 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
+        public List<Auto> ListByReservation(Reservation reservation)
+        {
+            using (AutoReservationContext context = new AutoReservationContext())
+            {
+                var myList = context.Autos
+                    .Where(p => p.Id == reservation.AutoId);
+                return new List<Auto>(myList);
+            }
+        }
+
+        public Auto GetById(int id)
+        {
+            return List.Where(a => a.Id == id).First();
+        }
+
         public void Add(Auto auto)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
-                if (auto.AutoKlasse == AutoKlasse.Luxusklasse && auto.Basistarif == 0)
-                {
-                    throw new ArgumentException("Der Basistarif muss festgelegt werden wenn die Luxusklasse ausgewählt ist.");
-                }
                 context.Add(auto);
+                context.SaveChanges();
+            }
+        }
+
+        public void Remove(Auto auto)
+        {
+            using (AutoReservationContext context = new AutoReservationContext())
+            {
+                context.Remove(auto);
+                context.SaveChanges();
+            }
+        }
+
+        public void Update(Auto auto)
+        {
+            using (AutoReservationContext context = new AutoReservationContext())
+            {
+                context.Update(auto);
                 context.SaveChanges();
             }
         }

@@ -10,7 +10,7 @@ namespace AutoReservation.Dal.Entities
     {
         public StandardAuto() { }
 
-        public StandardAuto(int id, string marke, int tagestarif, DateTime rowVersion)
+        public StandardAuto(int id, string marke, int tagestarif, byte[] rowVersion)
          :base(id, marke, tagestarif, rowVersion)
         {
 
