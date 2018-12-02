@@ -15,7 +15,7 @@ namespace AutoReservation.Service.Wcf.Testing
         [Fact]
         public void GetAutosTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            
         }
 
         [Fact]

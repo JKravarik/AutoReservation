@@ -20,10 +20,21 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
+        public List<Reservation> ListWhere(Auto auto)
+        {
+            var list = List.Where(r => r.AutoId == auto.Id);
+            return new List<Reservation>(list);
+        }
+
+        public List<Reservation> ListWhere(Kunde kunde)
+        {
+            var list = List.Where(r => r.KundeId == kunde.Id);
+            return new List<Reservation>(list);
+        }
+
         public Reservation GetById(int Id)
         {
-            var reservations = List.Where(r => r.ReservationsNr == Id).First();
-            return reservations;
+            return List.Where(r => r.ReservationsNr == Id).First();
         }
 
         public void Add(Reservation reservation)

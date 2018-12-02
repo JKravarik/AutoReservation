@@ -4,7 +4,6 @@ using System.Diagnostics;
 using AutoReservation.BusinessLayer;
 using AutoReservation.Common.DataTransferObjects;
 using AutoReservation.Common.Interfaces;
-using AutoReservation.Dal.Entities;
 
 namespace AutoReservation.Service.Wcf
 {
@@ -26,9 +25,9 @@ namespace AutoReservation.Service.Wcf
         private static void WriteActualMethod()
             => Console.WriteLine($"Calling: {new StackTrace().GetFrame(1).GetMethod().Name}");
 
-        public void AddAuto(Auto auto)
+        public void AddAuto(AutoDto auto)
         {
-            AutoManager.Add(auto);
+            AutoManager.Add(auto.ConvertToEntity());
         }
 
         public void AddKunde(KundeDto kunde)
@@ -36,74 +35,74 @@ namespace AutoReservation.Service.Wcf
             KundeManager.Add(kunde.ConvertToEntity());
         }
 
-        public void AddReservation(Reservation reservation)
+        public void AddReservation(ReservationDto reservation)
         {
-            ReservationsManager.Add(reservation);
+            ReservationsManager.Add(reservation.ConvertToEntity());
         }
 
-        public List<Auto> AutoListe()
+        public List<AutoDto> AutoListe()
         {
-            return AutoManager.List;
+            return AutoManager.List.ConvertToDtos();
         }
 
-        public List<Kunde> KundenListe()
+        public List<KundeDto> KundenListe()
         {
-            return KundeManager.List;
+            return KundeManager.List.ConvertToDtos();
         }
 
-        public List<Reservation> ReservationenListe()
+        public List<ReservationDto> ReservationenListe()
         {
-            return ReservationsManager.List;
+            return ReservationsManager.List.ConvertToDtos();
         }
 
-        public void RemoveAuto(Auto auto)
+        public void RemoveAuto(AutoDto auto)
         {
-            AutoManager.Remove(auto);
+            AutoManager.Remove(auto.ConvertToEntity());
         }
 
-        public void RemoveKunde(Kunde kunde)
+        public void RemoveKunde(KundeDto kunde)
         {
-            KundeManager.Remove(kunde);
+            KundeManager.Remove(kunde.ConvertToEntity());
         }
 
-        public void RemoveReservation(Reservation reservation)
+        public void RemoveReservation(ReservationDto reservation)
         {
-            ReservationsManager.Remove(reservation);
+            ReservationsManager.Remove(reservation.ConvertToEntity());
         }
 
-        public void UpdateAuto(Auto auto)
+        public void UpdateAuto(AutoDto auto)
         {
-            AutoManager.Update(auto);
+            AutoManager.Update(auto.ConvertToEntity());
         }
 
-        public void UpdateKunde(Kunde kunde)
+        public void UpdateKunde(KundeDto kunde)
         {
-            KundeManager.Update(kunde);
+            KundeManager.Update(kunde.ConvertToEntity());
         }
 
-        public void UpdateReservation(Reservation reservation)
+        public void UpdateReservation(ReservationDto reservation)
         {
-            throw new NotImplementedException();
+            ReservationsManager.Update(reservation.ConvertToEntity());
         }
 
-        public List<Auto> AutoListeWhereReservation(Reservation reservation)
+        public List<AutoDto> AutoListeWhereReservation(ReservationDto reservation)
         {
-            throw new NotImplementedException();
+            return AutoManager.ListWhere(reservation.ConvertToEntity()).ConvertToDtos();
         }
 
-        public List<Kunde> KundenListeWhereReservation(Reservation reservation)
+        public List<KundeDto> KundenListeWhereReservation(ReservationDto reservation)
         {
-            throw new NotImplementedException();
+            return KundeManager.ListWhere(reservation.ConvertToEntity()).ConvertToDtos();
         }
 
-        public List<Reservation> ReservationenListeWhereKunde(Kunde kunde)
+        public List<ReservationDto> ReservationenListeWhereKunde(KundeDto kunde)
         {
-            throw new NotImplementedException();
+            return ReservationsManager.ListWhere(kunde.ConvertToEntity()).ConvertToDtos();
         }
 
-        public List<Reservation> ReservationenListeWhereAuto(Auto auto)
+        public List<ReservationDto> ReservationenListeWhereAuto(AutoDto auto)
         {
-            throw new NotImplementedException();
+            return ReservationsManager.ListWhere(auto.ConvertToEntity()).ConvertToDtos();
         }
     }
 }

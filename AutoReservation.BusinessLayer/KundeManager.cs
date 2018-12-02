@@ -12,20 +12,22 @@ namespace AutoReservation.BusinessLayer
         {
             get
             {
-                using(AutoReservationContext context = new AutoReservationContext())
+                using (AutoReservationContext context = new AutoReservationContext())
                 {
                     return new List<Kunde>(context.Kunden);
                 }
             }
         }
 
+        public List<Kunde> ListWhere(Reservation reservation)
+        {
+            var list = List.Where(k => k.Id == reservation.KundeId);
+            return new List<Kunde>(list);
+        }
+
         public Kunde GetById(int id)
         {
-            using (AutoReservationContext context = new AutoReservationContext())
-            {
-                return List.Where(k => k.Id == id).First();
-
-            }
+            return List.Where(k => k.Id == id).First();
         }
 
         public void Add(Kunde kunde)

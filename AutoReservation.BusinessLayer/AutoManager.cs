@@ -21,14 +21,10 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public List<Auto> ListByReservation(Reservation reservation)
+        public List<Auto> ListWhere(Reservation reservation)
         {
-            using (AutoReservationContext context = new AutoReservationContext())
-            {
-                var myList = context.Autos
-                    .Where(p => p.Id == reservation.AutoId);
+                var myList = List.Where(a => a.Id == reservation.AutoId);
                 return new List<Auto>(myList);
-            }
         }
 
         public Auto GetById(int id)
