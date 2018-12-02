@@ -7,7 +7,6 @@ namespace AutoReservation.Dal.Entities
     {
         public Auto Auto { get; set; }
         public Kunde Kunde { get; set; }
-
         public int ReservationsNr { get; set; }
 
         private DateTime _von;

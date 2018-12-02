@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AutoReservation.Common.DataTransferObjects;
 using AutoReservation.Common.Interfaces;
 using AutoReservation.TestEnvironment;
 using Xunit;
@@ -8,26 +11,29 @@ namespace AutoReservation.Service.Wcf.Testing
     public abstract class ServiceTestBase
         : TestBase
     {
+        //private AutoReservationService target;
         protected abstract IAutoReservationService Target { get; }
-
         #region Read all entities
 
         [Fact]
         public void GetAutosTest()
         {
-            
+            var list = Target.AutoListe();
+            Assert.True(list.Count != 0);
         }
 
         [Fact]
         public void GetKundenTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            var list = Target.KundenListe();
+            Assert.True(list.Count != 0);
         }
 
         [Fact]
         public void GetReservationenTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            var list = Target.ReservationenListe();
+            Assert.True(list.Count != 0);
         }
 
         #endregion
@@ -37,19 +43,25 @@ namespace AutoReservation.Service.Wcf.Testing
         [Fact]
         public void GetAutoByIdTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            var firstCar = Target.AutoListe().First();
+            var CarById = Target.GetAutoById(firstCar.Id);
+            Assert.Equal(firstCar.Id, CarById.Id);
         }
 
         [Fact]
         public void GetKundeByIdTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            var firstCustomer = Target.KundenListe().First();
+            var CustomerById = Target.GetKundeById(firstCustomer.Id);
+            Assert.Equal(firstCustomer.Id, CustomerById.Id);
         }
 
         [Fact]
         public void GetReservationByNrTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            var firstReservation = Target.ReservationenListe().First();
+            var ReservationById = Target.GetReservationById(firstReservation.ReservationsNr);
+            Assert.Equal(firstReservation.ReservationsNr, ReservationById.ReservationsNr);
         }
 
         #endregion
@@ -59,19 +71,19 @@ namespace AutoReservation.Service.Wcf.Testing
         [Fact]
         public void GetAutoByIdWithIllegalIdTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Assert.Throws<ArgumentException>(() => Target.GetAutoById(-1));
         }
 
         [Fact]
         public void GetKundeByIdWithIllegalIdTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Assert.Throws<ArgumentException>(() => Target.GetKundeById(-1));
         }
 
         [Fact]
         public void GetReservationByNrWithIllegalIdTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Assert.Throws<ArgumentException>(() => Target.GetReservationById(-1));
         }
 
         #endregion
@@ -81,19 +93,54 @@ namespace AutoReservation.Service.Wcf.Testing
         [Fact]
         public void InsertAutoTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            int listCountBefor = Target.AutoListe().Count;
+            var auto = new AutoDto
+            {
+                AutoKlasse = AutoKlasse.Luxusklasse,
+                Basistarif = 20,
+                Marke = "BMW",
+                Tagestarif = 50
+            };
+            Target.AddAuto(auto);
+
+            int listCountAfter = Target.AutoListe().Count;
+
+            Assert.Equal(listCountBefor + 1, listCountAfter);
         }
 
         [Fact]
         public void InsertKundeTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            int listCountBefor = Target.KundenListe().Count;
+            var kunde = new KundeDto
+            {
+                Geburtsdatum = DateTime.Now.Subtract(new TimeSpan(8760, 5, 20, 3)),
+                Nachname = "fdsankj",
+                Vorname = "vdbajkvbao"
+            };
+            Target.AddKunde(kunde);
+
+            int listCountAfter = Target.KundenListe().Count;
+
+            Assert.Equal(listCountBefor + 1, listCountAfter);
         }
 
         [Fact]
         public void InsertReservationTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            int listCountBefor = Target.ReservationenListe().Count;
+            var reservation = new ReservationDto
+            {
+                Von = DateTime.Now,
+                Bis = DateTime.Now.AddDays(5),
+                Kunde = Target.KundenListe().First(),
+                Auto = Target.AutoListe().First()
+            };
+            Target.AddReservation(reservation);
+
+            int listCountAfter = Target.ReservationenListe().Count;
+
+            Assert.Equal(listCountBefor + 1, listCountAfter);
         }
 
         #endregion
@@ -103,19 +150,34 @@ namespace AutoReservation.Service.Wcf.Testing
         [Fact]
         public void DeleteAutoTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            int listCountBefor = Target.AutoListe().Count;
+            Target.RemoveAuto(Target.AutoListe().First());
+
+            int listCountAfter = Target.AutoListe().Count;
+
+            Assert.Equal(listCountBefor - 1, listCountAfter);
         }
 
         [Fact]
         public void DeleteKundeTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            int listCountBefor = Target.KundenListe().Count;
+            Target.RemoveKunde(Target.KundenListe().First());
+
+            int listCountAfter = Target.KundenListe().Count;
+
+            Assert.Equal(listCountBefor - 1, listCountAfter);
         }
 
         [Fact]
         public void DeleteReservationTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            int listCountBefor = Target.ReservationenListe().Count;
+            Target.RemoveReservation(Target.ReservationenListe().First());
+
+            int listCountAfter = Target.ReservationenListe().Count;
+
+            Assert.Equal(listCountBefor - 1, listCountAfter);
         }
 
         #endregion
@@ -125,19 +187,35 @@ namespace AutoReservation.Service.Wcf.Testing
         [Fact]
         public void UpdateAutoTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            var car = Target.AutoListe().First();
+            car.Marke = car.Marke == "BMW" ? "Fiat Punot" : "BMW";
+            Target.UpdateAuto(car);
+            var updatedCar = Target.GetAutoById(car.Id);
+
+            Assert.Equal(car.Marke, updatedCar.Marke);
         }
 
         [Fact]
         public void UpdateKundeTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            var kunde = Target.KundenListe().First();
+            kunde.Nachname = kunde.Nachname == "Muster" ? "Muster2" : "Muster";
+            Target.UpdateKunde(kunde);
+            var updatedKunde = Target.GetKundeById(kunde.Id);
+
+            Assert.Equal(kunde.Nachname, updatedKunde.Nachname);
         }
 
         [Fact]
         public void UpdateReservationTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            var reservation = Target.ReservationenListe().First();
+            reservation.Bis = reservation.Bis == reservation.Von.AddDays(1)
+                ? reservation.Von.AddDays(2) : reservation.Von.AddDays(1);
+            Target.UpdateReservation(reservation);
+            var updatedCar = Target.GetReservationById(reservation.ReservationsNr);
+
+            Assert.Equal(reservation.Bis, updatedCar.Bis);
         }
 
         #endregion

@@ -104,5 +104,20 @@ namespace AutoReservation.Service.Wcf
         {
             return ReservationsManager.ListWhere(auto.ConvertToEntity()).ConvertToDtos();
         }
+
+        public AutoDto GetAutoById(int id)
+        {
+            return AutoManager.GetById(id).ConvertToDto();
+        }
+
+        public KundeDto GetKundeById(int id)
+        {
+            return KundeManager.GetById(id).ConvertToDto();
+        }
+
+        public ReservationDto GetReservationById(int id)
+        {
+            return ReservationsManager.GetById(id).ConvertToDto();
+        }
     }
 }

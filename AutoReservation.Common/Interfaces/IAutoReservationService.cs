@@ -14,6 +14,10 @@ namespace AutoReservation.Common.Interfaces
         List<ReservationDto> ReservationenListeWhereKunde(KundeDto kunde);
         List<ReservationDto> ReservationenListeWhereAuto(AutoDto auto);
 
+        AutoDto GetAutoById(int id);
+        KundeDto GetKundeById(int id);
+        ReservationDto GetReservationById(int id);
+
         void UpdateAuto(AutoDto auto);
         void UpdateKunde(KundeDto kunde);
         void UpdateReservation(ReservationDto reservation);
