@@ -2,6 +2,7 @@
 using AutoReservation.Dal.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace AutoReservation.BusinessLayer
 {
@@ -27,7 +28,14 @@ namespace AutoReservation.BusinessLayer
 
         public Kunde GetById(int id)
         {
-            return List.Where(k => k.Id == id).First();
+            try
+            {
+                return List.Where(k => k.Id == id).First();
+            }
+            catch
+            {
+                throw new ArgumentException("No Such ID");
+            }
         }
 
         public void Add(Kunde kunde)

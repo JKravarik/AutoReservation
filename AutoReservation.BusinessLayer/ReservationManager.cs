@@ -15,7 +15,15 @@ namespace AutoReservation.BusinessLayer
             {
                 using (AutoReservationContext context = new AutoReservationContext())
                 {
-                    return new List<Reservation>(context.Reservationen);
+                    var kundenManager = new KundeManager();
+                    var autoManager = new AutoManager();
+                    var list = new List<Reservation>(context.Reservationen);
+                    foreach (var item in list)
+                    {
+                        item.Auto = autoManager.GetById(item.AutoId);
+                        item.Kunde = kundenManager.GetById(item.KundeId);
+                    }
+                    return list;
                 }
             }
         }

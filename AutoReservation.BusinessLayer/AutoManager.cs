@@ -29,7 +29,14 @@ namespace AutoReservation.BusinessLayer
 
         public Auto GetById(int id)
         {
-            return List.Where(a => a.Id == id).First();
+            try
+            {
+                return List.Where(a => a.Id == id).First();
+            }
+            catch
+            {
+                throw new ArgumentException("No Such ID");
+            }
         }
 
         public void Add(Auto auto)
