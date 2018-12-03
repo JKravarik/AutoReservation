@@ -12,8 +12,7 @@ namespace AutoReservation.Service.Wcf
         private AutoManager AutoManager { get; set; }
         private KundeManager KundeManager { get; set; }
         private ReservationManager ReservationsManager { get; set; }
-
-
+        
         public AutoReservationService()
         {
             KundeManager = new KundeManager();
@@ -21,10 +20,10 @@ namespace AutoReservation.Service.Wcf
             ReservationsManager = new ReservationManager();
         }
 
-
         private static void WriteActualMethod()
             => Console.WriteLine($"Calling: {new StackTrace().GetFrame(1).GetMethod().Name}");
 
+        #region Add
         public void AddAuto(AutoDto auto)
         {
             AutoManager.Add(auto.ConvertToEntity());
@@ -37,9 +36,22 @@ namespace AutoReservation.Service.Wcf
 
         public void AddReservation(ReservationDto reservation)
         {
-            ReservationsManager.Add(reservation.ConvertToEntity());
+            if (reservation.Auto == null || reservation.Kunde == null)
+            {
+                throw new ArgumentException("Reservation muss ein Auto und ein Kunde besitzen um gespeichert zu werden.");
+            }
+            if (IsCarAvailable(reservation.Auto, reservation))
+            {
+                ReservationsManager.Add(reservation.ConvertToEntity());
+            }
+            else
+            {
+                throw new ArgumentException("Das Auto ist in dieser Zeitspanne nicht verfügbar.");
+            }
         }
-
+        #endregion
+        
+        #region Lists
         public List<AutoDto> AutoListe()
         {
             return AutoManager.List.ConvertToDtos();
@@ -54,7 +66,9 @@ namespace AutoReservation.Service.Wcf
         {
             return ReservationsManager.List.ConvertToDtos();
         }
+        #endregion
 
+        #region Remove
         public void RemoveAuto(AutoDto auto)
         {
             AutoManager.Remove(auto.ConvertToEntity());
@@ -69,7 +83,9 @@ namespace AutoReservation.Service.Wcf
         {
             ReservationsManager.Remove(reservation.ConvertToEntity());
         }
+        #endregion
 
+        #region Update
         public void UpdateAuto(AutoDto auto)
         {
             AutoManager.Update(auto.ConvertToEntity());
@@ -82,9 +98,22 @@ namespace AutoReservation.Service.Wcf
 
         public void UpdateReservation(ReservationDto reservation)
         {
-            ReservationsManager.Update(reservation.ConvertToEntity());
+            if (reservation.Auto == null || reservation.Kunde == null)
+            {
+                throw new ArgumentException("Reservation muss ein Auto und ein Kunde besitzen um angepasst zu werden.");
+            }
+            if (IsCarAvailable(reservation.Auto, reservation))
+            {
+                ReservationsManager.Update(reservation.ConvertToEntity());
+            }
+            else
+            {
+                throw new ArgumentException("Das Auto ist in dieser Zeitspanne nicht verfügbar.");
+            }
         }
+        #endregion
 
+        #region ListWhere
         public List<AutoDto> AutoListeWhereReservation(ReservationDto reservation)
         {
             return AutoManager.ListWhere(reservation.ConvertToEntity()).ConvertToDtos();
@@ -118,6 +147,22 @@ namespace AutoReservation.Service.Wcf
         public ReservationDto GetReservationById(int id)
         {
             return ReservationsManager.GetById(id).ConvertToDto();
+        }
+
+        #endregion
+
+        public bool IsCarAvailable(AutoDto auto, ReservationDto reservation)
+        {
+            var list = ReservationsManager.ListWhere(auto.ConvertToEntity());
+            foreach (var item in list)
+            {
+                if (reservation.ReservationsNr != item.ReservationsNr && ReservationsManager.AreOverlapping(item,
+                    reservation.ConvertToEntity()))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

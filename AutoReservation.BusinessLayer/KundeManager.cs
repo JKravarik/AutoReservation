@@ -28,14 +28,7 @@ namespace AutoReservation.BusinessLayer
 
         public Kunde GetById(int id)
         {
-            try
-            {
-                return List.Where(k => k.Id == id).First();
-            }
-            catch
-            {
-                throw new ArgumentException("No Such ID");
-            }
+            return List.Where(k => k.Id == id).First();
         }
 
         public void Add(Kunde kunde)

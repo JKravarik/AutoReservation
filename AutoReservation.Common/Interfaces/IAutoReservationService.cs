@@ -29,5 +29,7 @@ namespace AutoReservation.Common.Interfaces
         void AddAuto(AutoDto auto);
         void AddKunde(KundeDto kunde);
         void AddReservation(ReservationDto reservation);
+
+        bool IsCarAvailable(AutoDto auto, ReservationDto reservation);
     }
 }

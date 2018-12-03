@@ -23,20 +23,13 @@ namespace AutoReservation.BusinessLayer
 
         public List<Auto> ListWhere(Reservation reservation)
         {
-                var myList = List.Where(a => a.Id == reservation.AutoId);
-                return new List<Auto>(myList);
+            var myList = List.Where(a => a.Id == reservation.AutoId);
+            return new List<Auto>(myList);
         }
 
         public Auto GetById(int id)
         {
-            try
-            {
-                return List.Where(a => a.Id == id).First();
-            }
-            catch
-            {
-                throw new ArgumentException("No Such ID");
-            }
+            return List.Where(a => a.Id == id).First();
         }
 
         public void Add(Auto auto)
