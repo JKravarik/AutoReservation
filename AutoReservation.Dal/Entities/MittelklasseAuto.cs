@@ -10,7 +10,7 @@ namespace AutoReservation.Dal.Entities
     {
         public MittelklasseAuto() { }
 
-        public MittelklasseAuto(int id, string marke, int tagestarif, DateTime rowVersion)
+        public MittelklasseAuto(int id, string marke, int tagestarif, byte[] rowVersion)
             : base(id, marke, tagestarif, rowVersion)
         {
 

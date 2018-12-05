@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoReservation.TestEnvironment;
 using Xunit;
 
@@ -13,7 +15,14 @@ namespace AutoReservation.BusinessLayer.Testing
         [Fact]
         public void UpdateReservationTest()
         {
-            throw new NotImplementedException("Test not implemented.");
+            var res = Target.List.First();
+            res.Von = DateTime.Now;
+            res.Bis = DateTime.Now.AddDays(1);
+
+            Target.Update(res);
+            var newRes = Target.GetById(res.ReservationsNr);
+
+            Assert.Equal(res.Von, newRes.Von);
         }
     }
 }

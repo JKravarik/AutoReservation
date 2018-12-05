@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoReservation.Dal.Entities;
 using AutoReservation.TestEnvironment;
 using Xunit;
 
@@ -22,55 +23,154 @@ namespace AutoReservation.BusinessLayer.Testing
         [Fact]
         public void ScenarioOkay01Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation first = new Reservation
+            {
+                Von = DateTime.Now,
+                Bis = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0))
+            };
+
+            Reservation second = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(2, 0, 0, 0)),
+                Bis = DateTime.Now.Add(new TimeSpan(3, 0, 0, 0))
+            };
+            Assert.False(Target.AreOverlapping(first, second));
         }
 
         [Fact]
         public void ScenarioOkay02Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation first = new Reservation
+            {
+                Von = DateTime.Now,
+                Bis = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0))
+            };
+
+            Reservation second = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(2, 0, 0, 0)),
+                Bis = DateTime.Now.Add(new TimeSpan(3, 0, 0, 0))
+            };
+            Assert.False(Target.AreOverlapping(second, first));
         }
 
         [Fact]
         public void ScenarioOkay03Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation first = new Reservation
+            {
+                Von = DateTime.Now,
+                Bis = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0))
+            };
+
+            Reservation second = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0)),
+                Bis = DateTime.Now.Add(new TimeSpan(3, 0, 0, 0))
+            };
+            Assert.False(Target.AreOverlapping(first, second));
         }
 
         [Fact]
         public void ScenarioOkay04Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation first = new Reservation
+            {
+                Von = DateTime.Now,
+                Bis = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0))
+            };
+
+            Reservation second = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0)),
+                Bis = DateTime.Now.Add(new TimeSpan(3, 0, 0, 0))
+            };
+            Assert.False(Target.AreOverlapping(second, first));
         }
 
         [Fact]
         public void ScenarioNotOkay01Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation first = new Reservation
+            {
+                Von = DateTime.Now,
+                Bis = DateTime.Now.Add(new TimeSpan(2, 0, 0, 0))
+            };
+
+            Reservation second = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0)),
+                Bis = DateTime.Now.Add(new TimeSpan(3, 0, 0, 0))
+            };
+            Assert.True(Target.AreOverlapping(first, second));
         }
 
         [Fact]
         public void ScenarioNotOkay02Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation first = new Reservation
+            {
+                Von = DateTime.Now,
+                Bis = DateTime.Now.Add(new TimeSpan(2, 0, 0, 0))
+            };
+
+            Reservation second = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0)),
+                Bis = DateTime.Now.Add(new TimeSpan(3, 0, 0, 0))
+            };
+            Assert.True(Target.AreOverlapping(second, first));
         }
 
         [Fact]
         public void ScenarioNotOkay03Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation first = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(2, 0, 0, 0)),
+                Bis = DateTime.Now.Add(new TimeSpan(3, 0, 0, 0))
+            };
+
+            Reservation second = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0)),
+                Bis = DateTime.Now.Add(new TimeSpan(4, 0, 0, 0))
+            };
+            Assert.True(Target.AreOverlapping(first, second));
         }
 
         [Fact]
         public void ScenarioNotOkay04Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation first = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(2, 0, 0, 0)),
+                Bis = DateTime.Now.Add(new TimeSpan(3, 0, 0, 0))
+            };
+
+            Reservation second = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0)),
+                Bis = DateTime.Now.Add(new TimeSpan(4, 0, 0, 0))
+            };
+            Assert.True(Target.AreOverlapping(second, first));
         }
 
         [Fact]
         public void ScenarioNotOkay05Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation first = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(2, 0, 0, 0)),
+                Bis = DateTime.Now.Add(new TimeSpan(5, 0, 0, 0))
+            };
+
+            Reservation second = new Reservation
+            {
+                Von = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0)),
+                Bis = DateTime.Now.Add(new TimeSpan(4, 0, 0, 0))
+            };
+            Assert.True(Target.AreOverlapping(first, second));
         }
     }
 }

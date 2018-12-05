@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AutoReservation.Dal.Entities
 {
@@ -8,11 +9,13 @@ namespace AutoReservation.Dal.Entities
         public string Vorname { get; set; }
         public string Nachname { get; set; }
         public DateTime Geburtsdatum { get; set; }
-        public DateTime RowVersion { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
 
         public Kunde() { }
 
-        public Kunde(int id, string vorname, string nachname, DateTime geburtstag, DateTime rowstamp)
+        public Kunde(int id, string vorname, string nachname, DateTime geburtstag, byte[] rowstamp)
             : this(id, vorname, nachname, geburtstag)
         {
             this.RowVersion = rowstamp;
