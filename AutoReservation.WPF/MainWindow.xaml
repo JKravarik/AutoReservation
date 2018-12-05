@@ -1,0 +1,43 @@
+﻿<Window x:Class="AutoReservation.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoReservation.WPF"
+        mc:Ignorable="d"
+        Title="Auto Reservation" Height="500" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="400"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0">Auto Reservation</TextBlock>
+        
+        <TabControl Grid.Row="1">
+            <TabItem Header="Kunde">
+                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="350"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Name="KundenListe" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Source={StaticResource listingKundenDataView}}">
+                        </ListBox>
+                    <ContentControl Name="KundenDetail" Grid.Row="0" Grid.Column="1" 
+                                        Content="{Binding Source={StaticResource listingKundenDataView}}" 
+                                        ContentTemplate="{StaticResource detailsKundenListingTemplate}"/>
+                    <Button Name="KundeHinzufügen" Grid.Row="1" Content="Kunde hinzufügen" Click="OpenAddCustomerWindow" />
+                </Grid>
+                
+            </TabItem>
+            <TabItem Header="Auto" />
+            <TabItem Header="Reservation" />
+        </TabControl>
+    </Grid>
+</Window>
+
