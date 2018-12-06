@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace AutoReservation.Common.DataTransferObjects
 {
-    public class AutoDto
+    public class AutoDto : INotifyPropertyChanged
     {
         public int Id { get; set; }
         public string Marke { get; set; }
@@ -13,6 +14,8 @@ namespace AutoReservation.Common.DataTransferObjects
         [Timestamp]
         public byte[] RowVersion { get; set; }
         public AutoKlasse AutoKlasse { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public override string ToString()
         {
