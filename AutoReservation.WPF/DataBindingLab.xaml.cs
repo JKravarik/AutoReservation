@@ -10,6 +10,7 @@ namespace AutoReservation.WPF
 {
     public partial class DataBindingLabApp : Application
     {
+        
         private ObservableCollection<KundeDto> kunde = new ObservableCollection<KundeDto>();
 
         void AppStartup(object sender, StartupEventArgs args)
@@ -33,7 +34,7 @@ namespace AutoReservation.WPF
         {
 
             #region Add Persons to customers
-            KundeDto kunde1 = new KundeDto;
+            KundeDto kunde1 = new KundeDto();
             this.Kunden.Add(kunde1);
 
             #endregion
