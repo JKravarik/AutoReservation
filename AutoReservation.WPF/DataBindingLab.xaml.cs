@@ -5,6 +5,7 @@ using System.Windows;
 using System.Data;
 using System.Xml;
 using System.Configuration;
+using AutoReservation.Common.DataTransferObjects;
 
 namespace AutoReservation.WPF
 {
