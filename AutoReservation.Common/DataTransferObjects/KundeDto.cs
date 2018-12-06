@@ -10,7 +10,7 @@ namespace AutoReservation.Common.DataTransferObjects
 
         public int Id { get; set; }
 
-        private string _nachname { get; set; }
+        private string _nachname;
         public string Nachname
         {
             get { return _nachname; }
@@ -23,7 +23,7 @@ namespace AutoReservation.Common.DataTransferObjects
             }
         }
 
-        private string _vorname { get; set; }
+        private string _vorname;
         public string Vorname
         {
             get { return _vorname; }

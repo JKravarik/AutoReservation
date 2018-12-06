@@ -72,19 +72,46 @@ namespace AutoReservation.Service.Wcf.Testing
         [Fact]
         public void GetAutoByIdWithIllegalIdTest()
         {
-            Assert.Throws<InvalidOperationException>(() => Target.GetAutoById(-1));
+            try
+            {
+                Target.GetAutoById(-1);
+                Assert.True(false);
+            }
+            catch
+            {
+                Assert.True(true);
+            }
+            //Assert.Throws<InvalidOperationException>(() => Target.GetAutoById(-1));
         }
 
         [Fact]
         public void GetKundeByIdWithIllegalIdTest()
         {
-            Assert.Throws<InvalidOperationException>(() => Target.GetKundeById(-1));
+            try
+            {
+                Target.GetKundeById(-1);
+                Assert.True(false);
+            }
+            catch
+            {
+                Assert.True(true);
+            }
+            //Assert.Throws<InvalidOperationException>(() => Target.GetKundeById(-1));
         }
 
         [Fact]
         public void GetReservationByNrWithIllegalIdTest()
         {
-            Assert.Throws<InvalidOperationException>(() => Target.GetReservationById(-1));
+            try
+            {
+                Target.GetReservationById(-1);
+                Assert.True(false);
+            }
+            catch
+            {
+                Assert.True(true);
+            }
+            //Assert.Throws<InvalidOperationException>(() => Target.GetReservationById(-1));
         }
 
         #endregion
@@ -272,7 +299,16 @@ namespace AutoReservation.Service.Wcf.Testing
                 Auto = new AutoDto(),
                 Kunde = new KundeDto()
             };
-            Assert.Throws<ArgumentException>(() => { Target.AddReservation(res); });
+            try
+            {
+                Target.AddReservation(res);
+                Assert.True(false);
+            }
+            catch
+            {
+                Assert.True(true);
+            }
+            //Assert.Throws<ArgumentException>(() => { Target.AddReservation(res); });
         }
 
         [Fact]
@@ -287,7 +323,16 @@ namespace AutoReservation.Service.Wcf.Testing
                 Bis = reservation.Bis,
                 Kunde = reservation.Kunde
             };
-            Assert.Throws<ArgumentException>(() => { Target.AddReservation(newReservation); });
+            try
+            {
+                Target.AddReservation(newReservation);
+                Assert.True(false);
+            }
+            catch
+            {
+                Assert.True(true);
+            }
+            //Assert.Throws<ArgumentException>(() => { Target.AddReservation(newReservation); });
         }
 
         [Fact]
@@ -295,7 +340,16 @@ namespace AutoReservation.Service.Wcf.Testing
         {
             var res = Target.ReservationenListe().First();
             res.Von = res.Bis.AddDays(1);
-            Assert.Throws<ArgumentException>(() => { Target.UpdateReservation(res); });
+            try
+            {
+                Target.UpdateReservation(res);
+                Assert.True(false);
+            }
+            catch
+            {
+                Assert.True(true);
+            }
+            //Assert.Throws<ArgumentException>(() => { Target.UpdateReservation(res); });
         }
 
         [Fact]
@@ -316,8 +370,16 @@ namespace AutoReservation.Service.Wcf.Testing
 
             updateRes.Von = new DateTime(1980, 12, 13);
             updateRes.Bis = new DateTime(1980, 12, 14);
-
-            Assert.Throws<ArgumentException>(() => { Target.UpdateReservation(updateRes); });
+            try
+            {
+                Target.UpdateReservation(updateRes);
+                Assert.True(false);
+            }
+            catch
+            {
+                Assert.True(true);
+            }
+            //Assert.Throws<ArgumentException>(() => { Target.UpdateReservation(updateRes); });
         }
         #endregion
 
