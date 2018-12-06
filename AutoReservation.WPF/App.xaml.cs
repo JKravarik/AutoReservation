@@ -17,7 +17,7 @@ namespace AutoReservation.WPF
         void AppStartup(object sender, StartupEventArgs args)
         {
             LoadCustomerData();
-            AutoReservation.WPF.MainWindow mainWindow = new AutoReservation.WPF.MainWindow();
+            MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             //AddProductWindow addProductWindow = new AddProductWindow();
             //addProductWindow.Show();
@@ -35,9 +35,20 @@ namespace AutoReservation.WPF
         {
 
             #region Add Persons to customers
-            KundeDto kunde1 = new KundeDto();
+            KundeDto kunde1 = new KundeDto
+            {
+                Nachname = "Müller",
+                Vorname = "Lisa",
+                Geburtsdatum = new DateTime(1994, 12, 6)
+            };
+            KundeDto kunde2 = new KundeDto
+            {
+                Nachname = "Müller",
+                Vorname = "Peter",
+                Geburtsdatum = new DateTime(1994, 5, 6)
+            };
             this.Kunden.Add(kunde1);
-
+            this.Kunden.Add(kunde2);
             #endregion
         }
 

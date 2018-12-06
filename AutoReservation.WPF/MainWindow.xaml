@@ -4,9 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoReservation.WPF"
+        xmlns:src="clr-namespace:AutoReservation.WPF" 
         mc:Ignorable="d"
         Title="Auto Reservation" Height="500" Width="800">
     <Window.Resources>
+
+        <DataTemplate x:Key="groupingHeaderTemplate">
+            <TextBlock Text="{Binding Path=Name}"
+                       Foreground="Navy" FontWeight="Bold" FontSize="12"/>
+        </DataTemplate>
+        
         <CollectionViewSource 
               Source="{Binding Source={x:Static Application.Current}, Path=KundeDto}"   
               x:Key="listingKundenDataView" />
@@ -31,8 +38,12 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <ListBox Name="KundenListe" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Source={StaticResource listingKundenDataView}}">
-                        </ListBox>
+                    <ListBox Name="KundenListe" Grid.Row="0" Grid.Column="0" 
+                             ItemsSource="{Binding Source={StaticResource listingKundenDataView}}">
+                        <ListBox.GroupStyle>
+                                 <GroupStyle HeaderTemplate="{StaticResource groupingHeaderTemplate}"/>
+                             </ListBox.GroupStyle>
+                    </ListBox>
                     <ContentControl Name="KundenDetail" Grid.Row="0" Grid.Column="1" 
                                         Content="{Binding Source={StaticResource listingKundenDataView}}" 
                                         ContentTemplate="{StaticResource detailsKundenListingTemplate}"/>
