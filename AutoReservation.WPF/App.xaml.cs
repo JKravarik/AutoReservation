@@ -6,12 +6,15 @@ using System.Data;
 using System.Xml;
 using System.Configuration;
 using AutoReservation.Common.DataTransferObjects;
+using AutoReservation.Service.Wcf;
+using AutoReservation.Common.Interfaces;
 
 namespace AutoReservation.WPF
 {
     public partial class App : Application
     {
-
+        private IAutoReservationService target;
+        protected IAutoReservationService Target => target ?? (target = new AutoReservationService());
         private ObservableCollection<KundeDto> kunde = new ObservableCollection<KundeDto>();
 
         void AppStartup(object sender, StartupEventArgs args)
@@ -33,23 +36,28 @@ namespace AutoReservation.WPF
 
         private void LoadCustomerData()
         {
+            var list = Target.KundenListe();
 
-            #region Add Persons to customers
-            KundeDto kunde1 = new KundeDto
+            foreach (var item in list)
             {
-                Nachname = "Müller",
-                Vorname = "Lisa",
-                Geburtsdatum = new DateTime(1994, 12, 6)
-            };
-            KundeDto kunde2 = new KundeDto
-            {
-                Nachname = "Müller",
-                Vorname = "Peter",
-                Geburtsdatum = new DateTime(1994, 5, 6)
-            };
-            this.Kunden.Add(kunde1);
-            this.Kunden.Add(kunde2);
-            #endregion
+                this.Kunden.Add(item);
+            }
+            //#region Add Persons to customers
+            //KundeDto kunde1 = new KundeDto
+            //{
+            //    Nachname = "Müller",
+            //    Vorname = "Lisa",
+            //    Geburtsdatum = new DateTime(1994, 12, 6)
+            //};
+            //KundeDto kunde2 = new KundeDto
+            //{
+            //    Nachname = "Müller",
+            //    Vorname = "Peter",
+            //    Geburtsdatum = new DateTime(1994, 5, 6)
+            //};
+            //this.Kunden.Add(kunde1);
+            //this.Kunden.Add(kunde2);
+            //#endregion
         }
 
     }

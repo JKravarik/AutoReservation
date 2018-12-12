@@ -15,8 +15,9 @@
         </DataTemplate>
         
         <CollectionViewSource 
-              Source="{Binding Source={x:Static Application.Current}, Path=KundeDto}"   
+              Source="{Binding Source={x:Static Application.Current}, Path=Kunden}"   
               x:Key="listingKundenDataView" />
+        
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
