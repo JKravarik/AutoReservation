@@ -6,15 +6,26 @@ using System.Data;
 using System.Xml;
 using System.Configuration;
 using AutoReservation.Common.DataTransferObjects;
-using AutoReservation.Service.Wcf;
 using AutoReservation.Common.Interfaces;
+using System.ServiceModel;
 
 namespace AutoReservation.WPF
 {
     public partial class App : Application
     {
         private IAutoReservationService target;
-        protected IAutoReservationService Target => target ?? (target = new AutoReservationService());
+        protected IAutoReservationService Target
+        {
+            get
+            {
+                if (target == null)
+                {
+                    ChannelFactory<IAutoReservationService> channelFactory = new ChannelFactory<IAutoReservationService>("AutoReservationService");
+                    target = channelFactory.CreateChannel();
+                }
+                return target;
+            }
+        }
         private ObservableCollection<KundeDto> kunde = new ObservableCollection<KundeDto>();
 
         void AppStartup(object sender, StartupEventArgs args)
