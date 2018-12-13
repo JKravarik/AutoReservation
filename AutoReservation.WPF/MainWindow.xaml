@@ -3,8 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AutoReservation.WPF"
-        xmlns:src="clr-namespace:AutoReservation.WPF" 
         mc:Ignorable="d"
         Title="Auto Reservation" Height="500" Width="800">
     <Window.Resources>
@@ -18,6 +16,7 @@
               Source="{Binding Source={x:Static Application.Current}, Path=Kunden}"   
               x:Key="listingKundenDataView" />
         
+        
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -29,7 +28,6 @@
         
         <TabControl Grid.Row="1">
             <TabItem Header="Kunde">
-                
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="350"/>
@@ -40,20 +38,73 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <ListBox Name="KundenListe" Grid.Row="0" Grid.Column="0" 
-                             ItemsSource="{Binding Source={StaticResource listingKundenDataView}}">
+                             ItemsSource="{Binding Source={StaticResource listingKundenDataView}}" 
+                             SelectionChanged="KundenListe_SelectionChanged">
                         <ListBox.GroupStyle>
-                                 <GroupStyle HeaderTemplate="{StaticResource groupingHeaderTemplate}"/>
-                             </ListBox.GroupStyle>
+                            <GroupStyle HeaderTemplate="{StaticResource groupingHeaderTemplate}"/>
+                        </ListBox.GroupStyle>
                     </ListBox>
-                    <ContentControl Name="KundenDetail" Grid.Row="0" Grid.Column="1" 
-                                        Content="{Binding Source={StaticResource listingKundenDataView}}" 
-                                        ContentTemplate="{StaticResource detailsKundenListingTemplate}"/>
-                    <Button Name="KundeHinzufügen" Grid.Row="1" Content="Kunde hinzufügen" Click="OpenAddCustomerWindow" />
+
+                    <Grid Name="KundenDetail" Grid.Column="1" Margin="5,5,5,10" IsEnabled="False" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="113"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,8,0"
+                           Name="IDTitle">ID:</TextBlock>
+                        <TextBlock Name="IdDTKey" Grid.Row="0" Grid.Column="1" 
+                           Text="{Binding Path=Id}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,8,0"
+                           Name="nachnameTitle">Nachname:</TextBlock>
+                        <TextBox Name="NachnameDTKey" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"
+                            Text="{Binding Path=Nachname}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,8,0"
+                         Name="vornameTitle">Vorname:</TextBlock>
+                        <TextBox Name="VornameDTKey" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top"
+                           Text="{Binding Path=Vorname}"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,0,8,0"
+                           Name="gebursdatumTitle">Geburtsdatum:</TextBlock>
+                        <DatePicker Name="GeburtsdatumDTKey" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"
+                           Text="{Binding Path=Geburtsdatum}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button HorizontalAlignment="Center" Name="KundeHinzufügen" Grid.Column="0" Content="Kunde hinzufügen" Click="AddCustomer" />
+                        <Button HorizontalAlignment="Center" Name="KundeLöschen" Grid.Column="1" Content="Kunde löschen" Click="RemoveCustomer" />
+                    </Grid>
+                    
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button HorizontalAlignment="Center" Name="KundeEdit" Grid.Column="0" Content="Kunde editieren" Click="EditCustomer" />
+                        <Button HorizontalAlignment="Center" Name="KundeSpeichern" Grid.Column="1" Content="Speichern" Click="SaveCustomer" IsEnabled="False"/>
+                    </Grid>
+
                 </Grid>
-                
             </TabItem>
+            
             <TabItem Header="Auto" />
+            
+            
             <TabItem Header="Reservation" />
+            
+            
         </TabControl>
     </Grid>
 </Window>

@@ -54,6 +54,6 @@ namespace AutoReservation.Common.DataTransferObjects
         }
 
         public override string ToString()
-            => $"{Id}; {Nachname}; {Vorname}; {Geburtsdatum}; {RowVersion}";
+            => $"{Id}: {Nachname}, {Vorname}";
     }
 }

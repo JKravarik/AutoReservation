@@ -75,7 +75,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="DataApp.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
@@ -83,8 +83,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
+    <Compile Include="DataApp.xaml.cs">
+      <DependentUpon>DataApp.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
@@ -127,10 +127,6 @@
     <ProjectReference Include="..\AutoReservation.Common\AutoReservation.Common.csproj">
       <Project>{22972439-3fff-41d2-b5ae-6c06abc66eb4}</Project>
       <Name>AutoReservation.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AutoReservation.Service.Wcf\AutoReservation.Service.Wcf.csproj">
-      <Project>{73f6e950-15a9-460d-993b-dfe469a9e286}</Project>
-      <Name>AutoReservation.Service.Wcf</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
