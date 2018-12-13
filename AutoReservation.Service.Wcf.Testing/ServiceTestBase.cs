@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using AutoReservation.Common.DataTransferObjects;
+using AutoReservation.Common.DataTransferObjects.Faults;
 using AutoReservation.Common.Interfaces;
 using AutoReservation.TestEnvironment;
 using Microsoft.EntityFrameworkCore;
@@ -72,46 +74,19 @@ namespace AutoReservation.Service.Wcf.Testing
         [Fact]
         public void GetAutoByIdWithIllegalIdTest()
         {
-            try
-            {
-                Target.GetAutoById(-1);
-                Assert.True(false);
-            }
-            catch
-            {
-                Assert.True(true);
-            }
-            //Assert.Throws<InvalidOperationException>(() => Target.GetAutoById(-1));
+            Assert.Throws<FaultException<GenericFault>>(() => Target.GetAutoById(-1));
         }
 
         [Fact]
         public void GetKundeByIdWithIllegalIdTest()
         {
-            try
-            {
-                Target.GetKundeById(-1);
-                Assert.True(false);
-            }
-            catch
-            {
-                Assert.True(true);
-            }
-            //Assert.Throws<InvalidOperationException>(() => Target.GetKundeById(-1));
+            Assert.Throws<FaultException<GenericFault>>(() => Target.GetKundeById(-1));
         }
 
         [Fact]
         public void GetReservationByNrWithIllegalIdTest()
         {
-            try
-            {
-                Target.GetReservationById(-1);
-                Assert.True(false);
-            }
-            catch
-            {
-                Assert.True(true);
-            }
-            //Assert.Throws<InvalidOperationException>(() => Target.GetReservationById(-1));
+            Assert.Throws<FaultException<GenericFault>>(() => Target.GetReservationById(-1));
         }
 
         #endregion
@@ -252,37 +227,34 @@ namespace AutoReservation.Service.Wcf.Testing
         [Fact]
         public void UpdateAutoWithOptimisticConcurrencyTest()
         {
-            var target = new AutoReservationService();
             var auto1 = Target.AutoListe().First();
-            var auto2 = target.AutoListe().First();
+            var auto2 = Target.AutoListe().First();
             auto1.Marke = "fdsa123";
             auto2.Marke = "v dja156";
             Target.UpdateAuto(auto1);
-            Assert.Throws<DbUpdateConcurrencyException>(() => { target.UpdateAuto(auto2); }); 
+            Assert.Throws<FaultException<GenericFault>>(() => { Target.UpdateAuto(auto2); }); 
         }
 
         [Fact]
         public void UpdateKundeWithOptimisticConcurrencyTest()
         {
-            var target = new AutoReservationService();
             var kunde1 = Target.KundenListe().First();
-            var kunde2 = target.KundenListe().First();
+            var kunde2 = Target.KundenListe().First();
             kunde1.Nachname = "fdsa123";
             kunde2.Nachname = "v dja156";
             Target.UpdateKunde(kunde1);
-            Assert.Throws<DbUpdateConcurrencyException>(() => { target.UpdateKunde(kunde2); });
+            Assert.Throws<FaultException<GenericFault>>(() => { Target.UpdateKunde(kunde2); });
         }
 
         [Fact]
         public void UpdateReservationWithOptimisticConcurrencyTest()
         {
-            var target = new AutoReservationService();
             var res1 = Target.ReservationenListe().First();
-            var res2 = target.ReservationenListe().First();
+            var res2 = Target.ReservationenListe().First();
             res1.Von = DateTime.MinValue;
             res2.Von = DateTime.MinValue.AddDays(1);
             Target.UpdateReservation(res1);
-            Assert.Throws<DbUpdateConcurrencyException>(() => { target.UpdateReservation(res2); });
+            Assert.Throws<FaultException<GenericFault>>(() => { Target.UpdateReservation(res2); });
         }
 
         #endregion

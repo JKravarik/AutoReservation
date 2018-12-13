@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using AutoReservation.Common.DataTransferObjects;
+using AutoReservation.Common.DataTransferObjects.Faults;
 
 namespace AutoReservation.Common.Interfaces
 {
@@ -13,7 +14,7 @@ namespace AutoReservation.Common.Interfaces
         [OperationContract]
         List<KundeDto> KundenListe();
         [OperationContract]
-        [FaultContract(typeof(ArgumentException))]
+        [FaultContract(typeof(GenericFault))]
         List<ReservationDto> ReservationenListe();
 
         [OperationContract]
@@ -26,20 +27,23 @@ namespace AutoReservation.Common.Interfaces
         List<ReservationDto> ReservationenListeWhereAuto(AutoDto auto);
 
         [OperationContract]
-        [FaultContract(typeof(InvalidOperationException))]
+        [FaultContract(typeof(GenericFault))]
         AutoDto GetAutoById(int id);
         [OperationContract]
-        [FaultContract(typeof(InvalidOperationException))]
+        [FaultContract(typeof(GenericFault))]
         KundeDto GetKundeById(int id);
         [OperationContract]
-        [FaultContract(typeof(InvalidOperationException))]
+        [FaultContract(typeof(GenericFault))]
         ReservationDto GetReservationById(int id);
 
         [OperationContract]
+        [FaultContract(typeof(GenericFault))]
         void UpdateAuto(AutoDto auto);
         [OperationContract]
+        [FaultContract(typeof(GenericFault))]
         void UpdateKunde(KundeDto kunde);
         [OperationContract]
+        [FaultContract(typeof(GenericFault))]
         void UpdateReservation(ReservationDto reservation);
 
         [OperationContract]
