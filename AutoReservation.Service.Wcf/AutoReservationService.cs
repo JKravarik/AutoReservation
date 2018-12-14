@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.ServiceModel;
 using AutoReservation.BusinessLayer;
 using AutoReservation.Common.DataTransferObjects;
+using AutoReservation.Common.DataTransferObjects.Faults;
 using AutoReservation.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoReservation.Service.Wcf
 {
@@ -12,7 +15,7 @@ namespace AutoReservation.Service.Wcf
         private AutoManager AutoManager { get; set; }
         private KundeManager KundeManager { get; set; }
         private ReservationManager ReservationsManager { get; set; }
-        
+
         public AutoReservationService()
         {
             KundeManager = new KundeManager();
@@ -50,7 +53,7 @@ namespace AutoReservation.Service.Wcf
             }
         }
         #endregion
-        
+
         #region Lists
         public List<AutoDto> AutoListe()
         {
@@ -88,27 +91,53 @@ namespace AutoReservation.Service.Wcf
         #region Update
         public void UpdateAuto(AutoDto auto)
         {
-            AutoManager.Update(auto.ConvertToEntity());
+            try
+            {
+                AutoManager.Update(auto.ConvertToEntity());
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                var fault = new GenericFault("Update Concurrency Exception");
+                throw new FaultException<GenericFault>(fault);
+            }
         }
 
         public void UpdateKunde(KundeDto kunde)
         {
-            KundeManager.Update(kunde.ConvertToEntity());
+            try
+            {
+                KundeManager.Update(kunde.ConvertToEntity());
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                var fault = new GenericFault("Update Concurrency Exception");
+                throw new FaultException<GenericFault>(fault);
+            }
         }
 
         public void UpdateReservation(ReservationDto reservation)
         {
             if (reservation.Auto == null || reservation.Kunde == null)
             {
-                throw new ArgumentException("Reservation muss ein Auto und ein Kunde besitzen um angepasst zu werden.");
+                var fault = new GenericFault("Reservation muss ein Auto und ein Kunde besitzen um angepasst zu werden.");
+                throw new FaultException<GenericFault>(fault);
             }
             if (IsCarAvailable(reservation.Auto, reservation))
             {
-                ReservationsManager.Update(reservation.ConvertToEntity());
+                try
+                {
+                    ReservationsManager.Update(reservation.ConvertToEntity());
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    var fault = new GenericFault("Update Concurrency Exception");
+                    throw new FaultException<GenericFault>(fault);
+                }
             }
             else
             {
-                throw new ArgumentException("Das Auto ist in dieser Zeitspanne nicht verfügbar.");
+                var fault = new GenericFault("Das Auto ist in dieser Zeitspanne nicht verfügbar.");
+                throw new FaultException<GenericFault>(fault);
             }
         }
         #endregion
@@ -136,17 +165,41 @@ namespace AutoReservation.Service.Wcf
 
         public AutoDto GetAutoById(int id)
         {
-            return AutoManager.GetById(id).ConvertToDto();
+            try
+            {
+                return AutoManager.GetById(id).ConvertToDto();
+            }
+            catch (InvalidOperationException)
+            {
+                var fault = new GenericFault("Keine Gültige ID");
+                throw new FaultException<GenericFault>(fault);
+            }
         }
 
         public KundeDto GetKundeById(int id)
         {
-            return KundeManager.GetById(id).ConvertToDto();
+            try
+            {
+                return KundeManager.GetById(id).ConvertToDto();
+            }
+            catch (InvalidOperationException)
+            {
+                var fault = new GenericFault("Keine Gültige ID");
+                throw new FaultException<GenericFault>(fault);
+            }
         }
 
         public ReservationDto GetReservationById(int id)
         {
-            return ReservationsManager.GetById(id).ConvertToDto();
+            try
+            {
+                return ReservationsManager.GetById(id).ConvertToDto();
+            }
+            catch (InvalidOperationException)
+            {
+                var fault = new GenericFault("Keine Gültige ID");
+                throw new FaultException<GenericFault>(fault);
+            }
         }
 
         #endregion

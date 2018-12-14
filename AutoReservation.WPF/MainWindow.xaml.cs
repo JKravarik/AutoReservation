@@ -1,5 +1,6 @@
 ﻿using AutoReservation.Common.DataTransferObjects;
 using AutoReservation.Common.Interfaces;
+using AutoReservation.Service.Wcf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

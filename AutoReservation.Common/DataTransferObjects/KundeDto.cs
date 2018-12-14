@@ -8,7 +8,16 @@ namespace AutoReservation.Common.DataTransferObjects
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public int Id { get; set; }
+        private int _id;
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                SetProperty(ref _id, value);
+                OnPropertyChanged(nameof(ToString));
+            }
+        }
 
         private string _nachname;
         public string Nachname
@@ -16,10 +25,8 @@ namespace AutoReservation.Common.DataTransferObjects
             get { return _nachname; }
             set
             {
-                if (SetProperty(ref _nachname, value))
-                {
-                    OnPropertyChanged(nameof(ToString));
-                }
+                SetProperty(ref _nachname, value);
+                OnPropertyChanged(nameof(ToString));
             }
         }
 
@@ -34,9 +41,27 @@ namespace AutoReservation.Common.DataTransferObjects
             }
         }
 
-        public DateTime Geburtsdatum { get; set; }
-        
-        public byte[] RowVersion { get; set; }
+        private DateTime _geburtsdatum;
+        public DateTime Geburtsdatum
+        {
+            get { return _geburtsdatum; }
+            set
+            {
+                SetProperty(ref _geburtsdatum, value);
+                OnPropertyChanged(nameof(ToString));
+            }
+        }
+
+        private byte[] _rowVersion;
+        public byte[] RowVersion
+        {
+            get { return _rowVersion; }
+            set
+            {
+                SetProperty(ref _rowVersion, value);
+                OnPropertyChanged(nameof(ToString));
+            }
+        }
 
         protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {

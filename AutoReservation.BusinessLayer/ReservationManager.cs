@@ -3,6 +3,7 @@ using AutoReservation.Dal.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoReservation.BusinessLayer
 {
@@ -15,6 +16,14 @@ namespace AutoReservation.BusinessLayer
             {
                 using (AutoReservationContext context = new AutoReservationContext())
                 {
+                    //var res = context
+                    //    .Reservationen
+                    //    .Include(r => r.Auto)
+                    //    .Include(r => r.Kunde)
+                    //    .ToList();
+
+                    //return res;
+
                     var kundenManager = new KundeManager();
                     var autoManager = new AutoManager();
                     var list = new List<Reservation>(context.Reservationen);
@@ -50,6 +59,7 @@ namespace AutoReservation.BusinessLayer
             using (AutoReservationContext context = new AutoReservationContext())
             {
                 context.Add(reservation);
+                //context.Entry(reservation).State = EntityState.Added;
                 context.SaveChanges();
             }
         }
