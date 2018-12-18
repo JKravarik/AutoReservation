@@ -94,7 +94,7 @@ namespace AutoReservation.Common.DataTransferObjects
 
         public override string ToString()
         {
-            return $"{Id}; {Marke}; {Tagestarif}; {Basistarif}; {AutoKlasse}; {RowVersion}";
+            return $"{Id}: {Marke}, {AutoKlasse}";
         }
     }
 }

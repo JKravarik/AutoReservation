@@ -30,12 +30,15 @@ namespace AutoReservation.WPF
         void AppStartup(object sender, StartupEventArgs args)
         {
             LoadCustomerData();
+            LoadAutoData();
             MainWindow mainWindow = new MainWindow();
             mainWindow.DataApp = this;
             mainWindow.Show();
         }
 
         public ObservableCollection<KundeDto> Kunden { get; set; } = new ObservableCollection<KundeDto>();
+        public ObservableCollection<AutoDto> Autos { get; set; } = new ObservableCollection<AutoDto>();
+        public ObservableCollection<ReservationDto> Reservations { get; set; } = new ObservableCollection<ReservationDto>();
 
         public void LoadCustomerData()
         {
@@ -48,5 +51,26 @@ namespace AutoReservation.WPF
             }
         }
 
+        public void LoadAutoData()
+        {
+            var list = Target.AutoListe();
+
+            this.Autos.Clear();
+            foreach (var item in list)
+            {
+                this.Autos.Add(item);
+            }
+        }
+
+        public void LoadReservationData()
+        {
+            var list = Target.ReservationenListe();
+
+            this.Reservations.Clear();
+            foreach (var item in list)
+            {
+                this.Reservations.Add(item);
+            }
+        }
     }
 }

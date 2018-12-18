@@ -4,41 +4,6 @@
              Startup="AppStartup">
     <Application.Resources>
 
-        <!--<DataTemplate x:Key="detailsKundenListingTemplate">
-            <Grid Margin="5,5,5,10">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="113"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,8,0"
-                           Name="IDTitle">ID:</TextBlock>
-                <TextBlock Name="IdDTKey" Grid.Row="0" Grid.Column="1" 
-                           Text="{Binding Path=Id}"/>
-
-                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,8,0"
-                           Name="nachnameTitle">Nachname:</TextBlock>
-                <TextBox Name="NachnameDTKey" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"
-                           Text="{Binding Path=Nachname}"/>
-
-                <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,8,0"
-                         Name="vornameTitle">Vorname:</TextBlock>
-                <TextBox Name="VornameDTKey" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top"
-                           Text="{Binding Path=Vorname}"/>
-
-                <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,0,8,0"
-                           Name="gebursdatumTitle">Geburtsdatum:</TextBlock>
-                <DatePicker Name="GeburtsdatumDTKey" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"
-                           Text="{Binding Path=Geburtsdatum}"/>
-            </Grid>
-        </DataTemplate>-->
-
 
     </Application.Resources>
 </Application>
