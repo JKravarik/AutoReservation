@@ -77,7 +77,7 @@
 
                         <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,0,8,0">Geburtsdatum:</TextBlock>
                         <DatePicker Name="GeburtsdatumDTKey" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"
-                           Text="{Binding Path=Geburtsdatum}"/>
+                           SelectedDate="{Binding Path=Geburtsdatum}"/>
                     </Grid>
 
                     <Grid Grid.Row="1">
