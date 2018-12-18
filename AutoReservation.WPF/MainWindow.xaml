@@ -3,55 +3,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:my="http://schemas.microsoft.com/netfx/2007/xaml/presentation"
         mc:Ignorable="d"
-        Title="Auto Reservation" Height="500" Width="800">
+        Title="Auto Reservation" Height="550" Width="800">
     <Window.Resources>
-
         <DataTemplate x:Key="groupingHeaderTemplate">
-            <TextBlock Text="{Binding Path=Name}"
-                       Foreground="Navy" FontWeight="Bold" FontSize="12"/>
+            <TextBlock Text="{Binding Path=Name}" Foreground="Navy" FontWeight="Bold" FontSize="12"/>
         </DataTemplate>
-        
+
         <CollectionViewSource 
-              Source="{Binding Source={x:Static Application.Current}, Path=Kunden}"   
-              x:Key="listingKundenDataView" />
+              Source="{Binding Source={x:Static Application.Current}, Path=Kunden}" x:Key="listingKundenDataView" />
         <CollectionViewSource 
-              Source="{Binding Source={x:Static Application.Current}, Path=Autos}"   
-              x:Key="listingAutoDataView" />
+              Source="{Binding Source={x:Static Application.Current}, Path=Autos}" x:Key="listingAutoDataView" />
         <CollectionViewSource 
-              Source="{Binding Source={x:Static Application.Current}, Path=Reservations}"   
-              x:Key="listingReservationDataView" />
-        
-        
+              Source="{Binding Source={x:Static Application.Current}, Path=Reservations}" x:Key="listingReservationDataView" />
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions> 
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="400"/>
+            <RowDefinition Height="Auto"/> 
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0">Auto Reservation</TextBlock>
-        
+        <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="20" Foreground="#713f5b" Margin="0,10">Auto Reservation</TextBlock>
+
         <TabControl Grid.Row="1">
             <TabItem Header="Kunde" Name="TabKunde">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="350"/>
+                        <RowDefinition Height="350"/> 
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="80*"/> 
+                        <ColumnDefinition Width="45*"/> 
+                        <ColumnDefinition Width="26*"/>
+                        <ColumnDefinition Width="245*"/> 
+                        <ColumnDefinition Width="395*"/>
                     </Grid.ColumnDefinitions>
                     <ListBox Name="KundenListe" Grid.Row="0" Grid.Column="0" 
+                             ItemContainerStyle="{StaticResource SimpleListBoxItem}"
                              ItemsSource="{Binding Source={StaticResource listingKundenDataView}}" 
-                             SelectionChanged="KundenListe_SelectionChanged">
+                             SelectionChanged="KundenListe_SelectionChanged" Grid.ColumnSpan="4" Margin="0,0,0.5,0">
                         <ListBox.GroupStyle>
                             <GroupStyle HeaderTemplate="{StaticResource groupingHeaderTemplate}"/>
                         </ListBox.GroupStyle>
                     </ListBox>
 
-                    <Grid Name="KundenDetail" Grid.Column="1" Margin="5,5,5,10" IsEnabled="False" >
+                    <Grid Name="KundenDetail" Grid.Column="4" Margin="5.5,5,5,10" IsEnabled="False" >
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -63,57 +62,50 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,8,0">ID:</TextBlock>
-                        <TextBlock Name="KundeIdDTKey" Grid.Row="0" Grid.Column="1" 
-                           Text="{Binding Path=Id}"/>
+                        <TextBlock Grid.Row="0" Grid.Column="0" >ID:</TextBlock>
+                        <TextBlock Name="KundeIdDTKey" Grid.Row="0" Grid.Column="1" Text="{Binding Path=Id}"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,8,0">Nachname:</TextBlock>
-                        <TextBox Name="NachnameDTKey" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"
-                            Text="{Binding Path=Nachname}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" >Nachname:</TextBlock>
+                        <TextBox Name="NachnameDTKey" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Nachname}"/>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,8,0">Vorname:</TextBlock>
-                        <TextBox Name="VornameDTKey" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top"
-                           Text="{Binding Path=Vorname}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" >Vorname:</TextBlock>
+                        <TextBox Name="VornameDTKey" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Vorname}"/>
 
-                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,0,8,0">Geburtsdatum:</TextBlock>
-                        <DatePicker Name="GeburtsdatumDTKey" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"
-                           SelectedDate="{Binding Path=Geburtsdatum}"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" >Geburtsdatum:</TextBlock>
+                        <DatePicker Name="GeburtsdatumDTKey" Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Path=Geburtsdatum}"/>
                     </Grid>
 
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
+                    <Grid Grid.Row="1" Grid.ColumnSpan="4" Margin="0,0,0.5,0">
+                        <Grid.ColumnDefinitions> 
                             <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition/> 
                         </Grid.ColumnDefinitions>
                         <Button HorizontalAlignment="Center" Name="KundeHinzufügen" Grid.Column="0" Content="Kunde hinzufügen" Click="AddCustomer" />
                         <Button HorizontalAlignment="Center" Name="KundeLöschen" Grid.Column="1" Content="Kunde löschen" Click="RemoveCustomer" />
                     </Grid>
-                    
-                    <Grid Grid.Row="1" Grid.Column="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Margin="244,0,0,0">
+                        <Grid.ColumnDefinitions> <ColumnDefinition/><ColumnDefinition/> </Grid.ColumnDefinitions>
                         <Button HorizontalAlignment="Center" Name="KundeEdit" Grid.Column="0" Content="Kunde editieren" Click="EditCustomer" />
                         <Button HorizontalAlignment="Center" Name="KundeSpeichern" Grid.Column="1" Content="Speichern" Click="SaveCustomer" IsEnabled="False"/>
                     </Grid>
-
                 </Grid>
             </TabItem>
-            
-            
-            
-            <TabItem Header="Auto" Name="TabAuto">
+
+
+
+            <TabItem Header="Auto" Name="TabAuto" >
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="350"/>
+                        <RowDefinition Height="350"/> 
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions> 
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition/> 
                     </Grid.ColumnDefinitions>
                     <ListBox Name="AutoListe" Grid.Row="0" Grid.Column="0" 
+                             ItemContainerStyle="{StaticResource SimpleListBoxItem}"
                              ItemsSource="{Binding Source={StaticResource listingAutoDataView}}" 
                              SelectionChanged="AutoListe_SelectionChanged">
                         <ListBox.GroupStyle>
@@ -123,56 +115,50 @@
 
                     <Grid Name="AutoDetail" Grid.Column="1" Margin="5,5,5,10" IsEnabled="False" >
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition/> 
+                            <RowDefinition/> 
+                            <RowDefinition/> 
+                            <RowDefinition/> 
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="113"/>
+                            <ColumnDefinition Width="113"/> 
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,8,0">ID:</TextBlock>
-                        <TextBlock Name="AutoIdDTKey" Grid.Row="0" Grid.Column="1" 
-                           Text="{Binding Path=Id}"/>
+                        <TextBlock Grid.Row="0" Grid.Column="0" >ID:</TextBlock>
+                        <TextBlock Name="AutoIdDTKey" Grid.Row="0" Grid.Column="1" Text="{Binding Path=Id}"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,8,0">Marke:</TextBlock>
-                        <TextBox Name="AutoMarkeDTKey" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"
-                            Text="{Binding Path=Marke}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" >Marke:</TextBlock>
+                        <TextBox Name="AutoMarkeDTKey" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Marke}"/>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,8,0">Klasse:</TextBlock>
-                        <TextBox Name="AutoKlasseDTKey" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top"
-                           Text="{Binding Path=AutoKlasse}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" >Klasse:</TextBlock>
+                        <TextBox Name="AutoKlasseDTKey" Grid.Row="2" Grid.Column="1" Text="{Binding Path=AutoKlasse}"/>
 
-                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,0,8,0">Tagestarif:</TextBlock>
-                        <TextBox Name="AutoTagesTarifDTKey" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"
-                           Text="{Binding Path=Tagestarif}"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" >Tagestarif in CHF:</TextBlock>
+                        <TextBox Name="AutoTagesTarifDTKey" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Tagestarif}"/>
 
-                        <TextBlock Grid.Row="4" Grid.Column="0" Margin="0,0,8,0">Basistarif:</TextBlock>
-                        <TextBox Name="AutoBasisTarifDTKey" Grid.Row="4" Grid.Column="1" VerticalAlignment="Top"
-                           Text="{Binding Path=Basistarif}"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" >Basistarif in CHF:</TextBlock>
+                        <TextBox Name="AutoBasisTarifDTKey" Grid.Row="4" Grid.Column="1" Text="{Binding Path=Basistarif}"/>
                     </Grid>
 
                     <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions> 
                             <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition/>  
                         </Grid.ColumnDefinitions>
                         <Button HorizontalAlignment="Center" Name="AutoHinzufügen" Grid.Column="0" Content="Auto hinzufügen" Click="AddCar" />
                         <Button HorizontalAlignment="Center" Name="AutoLöschen" Grid.Column="1" Content="Auto löschen" Click="RemoveCar" />
                     </Grid>
 
                     <Grid Grid.Row="1" Grid.Column="1">
-                        <Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions> 
                             <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition/> 
                         </Grid.ColumnDefinitions>
                         <Button HorizontalAlignment="Center" Name="AutoEdit" Grid.Column="0" Content="Auto editieren" Click="EditCar" />
                         <Button HorizontalAlignment="Center" Name="AutoSpeichern" Grid.Column="1" Content="Speichern" Click="SaveCar" IsEnabled="False"/>
                     </Grid>
-
                 </Grid>
             </TabItem>
 
@@ -181,77 +167,71 @@
             <TabItem Header="Reservation" Name="TabReservation">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="350"/>
+                        <RowDefinition Height="350"/> 
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="29*"/> 
+                        <ColumnDefinition Width="366*"/> 
+                        <ColumnDefinition Width="395*"/>
                     </Grid.ColumnDefinitions>
                     <ListBox Name="ReservationListe" Grid.Row="0" Grid.Column="0" 
+                             ItemContainerStyle="{StaticResource SimpleListBoxItem}"
                              ItemsSource="{Binding Source={StaticResource listingReservationDataView}}" 
-                             SelectionChanged="ResListe_SelectionChanged">
+                             SelectionChanged="ResListe_SelectionChanged" Grid.ColumnSpan="2" Margin="0,0,0.5,0">
                         <ListBox.GroupStyle>
                             <GroupStyle HeaderTemplate="{StaticResource groupingHeaderTemplate}"/>
                         </ListBox.GroupStyle>
                     </ListBox>
 
-                    <Grid Name="ReservationDetail" Grid.Column="1" Margin="5,5,5,10" IsEnabled="False" >
+                    <Grid Name="ReservationDetail" Grid.Column="2" Margin="5.5,5,5,10" IsEnabled="False" >
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition/> 
+                            <RowDefinition/> 
+                            <RowDefinition/> 
+                            <RowDefinition/> 
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="113"/>
+                            <ColumnDefinition Width="113"/> 
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,8,0">Reservation Nr.:</TextBlock>
-                        <TextBlock Name="ResIdDTKey" Grid.Row="0" Grid.Column="1" 
-                           Text="{Binding Path=ReservationsNr}"/>
+                        <TextBlock Grid.Row="0" Grid.Column="0" >Reservation Nr.:</TextBlock>
+                        <TextBlock Name="ResIdDTKey" Grid.Row="0" Grid.Column="1" Text="{Binding Path=ReservationsNr}"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,8,0">Auto:</TextBlock>
-                        <TextBox Name="ResAutoDTKey" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"
-                            Text="{Binding Path=Auto}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" >Auto:</TextBlock>
+                        <ComboBox Name="ResAutoDTKey" Grid.Row="1" Grid.Column="1" ItemBindingGroup="{Binding Path=Auto}"/>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,8,0">Kunde:</TextBlock>
-                        <TextBox Name="ResKundeDTKey" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top"
-                           Text="{Binding Path=Kunde}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" >Kunde:</TextBlock>
+                        <ComboBox Name="ResKundeDTKey" Grid.Row="2" Grid.Column="1" ItemBindingGroup="{Binding Path=Kunde}"/>
 
-                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,0,8,0">Von:</TextBlock>
-                        <DatePicker Name="ResVonDTKey" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"
-                           Text="{Binding Path=Von}"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" >Von:</TextBlock>
+                        <DatePicker Name="ResVonDTKey" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Von}"/>
 
-                        <TextBlock Grid.Row="4" Grid.Column="0" Margin="0,0,8,0">Bis:</TextBlock>
-                        <DatePicker Name="ResBisDTKey" Grid.Row="4" Grid.Column="1" VerticalAlignment="Top"
-                           Text="{Binding Path=Bis}"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" >Bis:</TextBlock>
+                        <DatePicker Name="ResBisDTKey" Grid.Row="4" Grid.Column="1" Text="{Binding Path=Bis}"/>
                     </Grid>
 
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0.5,0">
+                        <Grid.ColumnDefinitions> 
                             <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition/> 
                         </Grid.ColumnDefinitions>
                         <Button HorizontalAlignment="Center" Name="ResHinzufügen" Grid.Column="0" Content="Reservation hinzufügen" Click="AddRes" />
                         <Button HorizontalAlignment="Center" Name="ResLöschen" Grid.Column="1" Content="Reservation löschen" Click="RemoveRes" />
                     </Grid>
 
-                    <Grid Grid.Row="1" Grid.Column="1">
-                        <Grid.ColumnDefinitions>
+                    <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="365.5,0,0,0">
+                        <Grid.ColumnDefinitions> 
                             <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition/> 
                         </Grid.ColumnDefinitions>
-                        <Button HorizontalAlignment="Center" Name="ResEdit" Grid.Column="0" Content="REservation editieren" Click="EditRes" />
+                        <Button HorizontalAlignment="Center" Name="ResEdit" Grid.Column="0" Content="Reservation editieren" Click="EditRes" />
                         <Button HorizontalAlignment="Center" Name="ResSpeichern" Grid.Column="1" Content="Speichern" Click="SaveRes" IsEnabled="False"/>
                     </Grid>
-
                 </Grid>
             </TabItem>
-
-
         </TabControl>
     </Grid>
 </Window>
