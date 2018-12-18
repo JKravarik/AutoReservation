@@ -59,10 +59,8 @@ namespace AutoReservation.WPF
         {
             KundenDetail.IsEnabled = true;
             KundeSpeichern.IsEnabled = true;
-            NachnameDTKey.Text = "";
-            VornameDTKey.Text = "";
-            GeburtsdatumDTKey.Text = "";
-            KundeIdDTKey.Text = "";
+            Kunde = new KundeDto();
+            DataContext = Kunde;
         }
 
         private void RemoveCustomer (object sender, RoutedEventArgs e)
@@ -110,11 +108,8 @@ namespace AutoReservation.WPF
         {
             AutoDetail.IsEnabled = true;
             AutoSpeichern.IsEnabled = true;
-            AutoKlasseDTKey.Text = "";
-            AutoMarkeDTKey.Text = "";
-            AutoTagesTarifDTKey.Text = "";
-            AutoBasisTarifDTKey.Text = "";
-            AutoIdDTKey.Text = "";
+            Auto = new AutoDto();
+            DataContext = Auto;
         }
 
         private void RemoveCar(object sender, RoutedEventArgs e)
@@ -164,11 +159,8 @@ namespace AutoReservation.WPF
         {
             ReservationDetail.IsEnabled = true;
             ResSpeichern.IsEnabled = true;
-            ResAutoDTKey.Text = "";
-            ResBisDTKey.Text = "";
-            ResIdDTKey.Text = "";
-            ResKundeDTKey.Text = "";
-            ResVonDTKey.Text = "";
+            Reservation = new ReservationDto();
+            DataContext = Reservation;
         }
 
         private void RemoveRes(object sender, RoutedEventArgs e)
