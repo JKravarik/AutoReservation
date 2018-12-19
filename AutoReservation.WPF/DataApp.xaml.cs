@@ -29,9 +29,10 @@ namespace AutoReservation.WPF
 
         void AppStartup(object sender, StartupEventArgs args)
         {
+            MainWindow mainWindow = new MainWindow();
             LoadCustomerData();
             LoadAutoData();
-            MainWindow mainWindow = new MainWindow();
+            LoadReservationData();
             mainWindow.DataApp = this;
             mainWindow.Show();
         }

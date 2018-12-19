@@ -201,10 +201,12 @@
                         <TextBlock Name="ResIdDTKey" Grid.Row="0" Grid.Column="1" Text="{Binding Path=ReservationsNr}"/>
 
                         <TextBlock Grid.Row="1" Grid.Column="0" >Auto:</TextBlock>
-                        <ComboBox Name="ResAutoDTKey" Grid.Row="1" Grid.Column="1" ItemBindingGroup="{Binding Path=Auto}"/>
+                        <ComboBox Name="ResAutoDTKey" Grid.Row="1" Grid.Column="1" ItemBindingGroup="{Binding Path=Auto}"
+                                  SelectedValuePath="Id"/>
 
                         <TextBlock Grid.Row="2" Grid.Column="0" >Kunde:</TextBlock>
-                        <ComboBox x:Name="ResKundeDTKey" Grid.Row="2" Grid.Column="1" ItemBindingGroup="{Binding Path=Kunde}"/>
+                        <ComboBox x:Name="ResKundeDTKey" Grid.Row="2" Grid.Column="1" ItemBindingGroup="{Binding Path=Kunde}"
+                                  SelectedValuePath="Id"/>
 
                         <TextBlock Grid.Row="3" Grid.Column="0" >Von:</TextBlock>
                         <DatePicker Name="ResVonDTKey" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Von}"/>

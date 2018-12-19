@@ -163,6 +163,8 @@ namespace AutoReservation.WPF
             ResSpeichern.IsEnabled = true;
             Reservation = new ReservationDto();
             DataContext = Reservation;
+            ResAutoDTKey.SelectedItem = null;
+            ResKundeDTKey.SelectedItem = null;
         }
 
         private void RemoveRes(object sender, RoutedEventArgs e)
@@ -179,7 +181,14 @@ namespace AutoReservation.WPF
 
         private void SaveRes(object sender, RoutedEventArgs e)
         {
-            if (Auto.Id > 0)
+            if (!IsResSaveable())
+            {
+                MessageBox.Show("Auto und Kunde müssen angegeben werden", "Speicherfehler", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (Reservation.ReservationsNr > 0)
             {
                 DataBase.UpdateReservation(Reservation);
             }
@@ -190,6 +199,21 @@ namespace AutoReservation.WPF
             DataApp.LoadReservationData();
             ResSpeichern.IsEnabled = false;
             ReservationDetail.IsEnabled = false;
+        }
+
+        private bool IsResSaveable()
+        {
+            if (Reservation.Auto != null && Reservation.Kunde != null)
+            {
+                return true;
+            }
+            if(ResAutoDTKey.SelectedValue == null || ResKundeDTKey.SelectedValue == null)
+            {
+                return false;
+            }
+            Reservation.Auto = DataBase.GetAutoById((int)ResAutoDTKey.SelectedValue);
+            Reservation.Kunde = DataBase.GetKundeById((int)ResKundeDTKey.SelectedValue);
+            return true;
         }
 
         private void ResListe_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -203,6 +227,14 @@ namespace AutoReservation.WPF
                 Reservation = new ReservationDto();
             }
             DataContext = Reservation;
+            if(Reservation.Auto != null)
+            {
+                ResAutoDTKey.SelectedValue = Reservation.Auto.Id;
+            }
+            if(Reservation.Kunde != null)
+            {
+                ResKundeDTKey.SelectedValue = Reservation.Kunde.Id;
+            }
         }
     }
 }
