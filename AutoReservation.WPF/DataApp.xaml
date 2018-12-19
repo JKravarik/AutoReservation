@@ -8,13 +8,29 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="5" Background="#c89ab4" Padding="10" Margin="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Border CornerRadius="5" Background="#c89ab4" BorderThickness="0.5" BorderBrush="#713f5b" Padding="10" Margin="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Button.Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="MistyRose" Direction="320" ShadowDepth="3" BlurRadius="5" Opacity="0.5" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            
+            <Setter Property="Button.Foreground" Value="#6b0053" />
+        </Style>
+
+        <Style TargetType="{x:Type TabControl}">
+            <Setter Property="Background" Value="MistyRose"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="#985d7f"/>
         </Style>
 
         <Style TargetType="{x:Type TabItem}">
@@ -35,6 +51,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Button.Foreground" Value="#6b0053" />
         </Style>
 
         <Style TargetType="{x:Type TextBox}">
@@ -74,6 +91,12 @@
             <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="Black"/>
+        </Style>
+
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="MistyRose"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#985d7f"/>
         </Style>
 
         <Style x:Key="SimpleListBoxItem" TargetType="ListBoxItem">

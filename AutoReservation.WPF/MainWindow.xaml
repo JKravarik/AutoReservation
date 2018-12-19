@@ -27,7 +27,6 @@
 
         <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="20" Foreground="#713f5b" Margin="0,10">Auto Reservation</TextBlock>
 
-        <!--SelectionChanged="TabControl_SelectionChanged"-->
         <TabControl Grid.Row="1" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Kunde" Name="TabKunde">
                 <Grid>

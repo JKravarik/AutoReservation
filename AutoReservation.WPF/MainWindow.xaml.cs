@@ -60,6 +60,8 @@ namespace AutoReservation.WPF
         {
             KundenDetail.IsEnabled = true;
             KundeSpeichern.IsEnabled = true;
+            KundeEdit.IsEnabled = false;
+            KundeHinzufügen.IsEnabled = false;
             Kunde = new KundeDto();
             DataContext = Kunde;
         }
