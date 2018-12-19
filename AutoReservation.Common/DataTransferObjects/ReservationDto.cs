@@ -7,6 +7,12 @@ namespace AutoReservation.Common.DataTransferObjects
 {
     public class ReservationDto : INotifyPropertyChanged
     {
+        public ReservationDto()
+        {
+            Von = DateTime.Now;
+            Bis = DateTime.Now.AddHours(24);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private int _reservationsNr;

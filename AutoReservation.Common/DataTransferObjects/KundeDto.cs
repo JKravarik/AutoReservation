@@ -6,6 +6,11 @@ namespace AutoReservation.Common.DataTransferObjects
 {
     public class KundeDto : INotifyPropertyChanged
     {
+        public KundeDto()
+        {
+            Geburtsdatum = DateTime.Now.AddYears(-20);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private int _id;
