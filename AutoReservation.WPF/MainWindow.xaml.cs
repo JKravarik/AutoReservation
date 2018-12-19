@@ -52,7 +52,9 @@ namespace AutoReservation.WPF
             {
                 this.DataContext = Reservation;
             }
-            
+
+            ResKundeDTKey.ItemsSource = DataBase.KundenListe();
+            ResAutoDTKey.ItemsSource = DataBase.AutoListe();
         }
 
         private void AddCustomer(object sender, RoutedEventArgs e)

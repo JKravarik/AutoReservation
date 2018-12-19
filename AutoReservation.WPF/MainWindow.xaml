@@ -204,7 +204,7 @@
                         <ComboBox Name="ResAutoDTKey" Grid.Row="1" Grid.Column="1" ItemBindingGroup="{Binding Path=Auto}"/>
 
                         <TextBlock Grid.Row="2" Grid.Column="0" >Kunde:</TextBlock>
-                        <ComboBox Name="ResKundeDTKey" Grid.Row="2" Grid.Column="1" ItemBindingGroup="{Binding Path=Kunde}"/>
+                        <ComboBox x:Name="ResKundeDTKey" Grid.Row="2" Grid.Column="1" ItemBindingGroup="{Binding Path=Kunde}"/>
 
                         <TextBlock Grid.Row="3" Grid.Column="0" >Von:</TextBlock>
                         <DatePicker Name="ResVonDTKey" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Von}"/>
