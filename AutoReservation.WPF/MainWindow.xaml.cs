@@ -155,7 +155,11 @@ namespace AutoReservation.WPF
         }
 
 
-
+        private void TabReservation_Clicked(object sender, MouseButtonEventArgs e)
+        {
+            ResKundeDTKey.ItemsSource = DataBase.KundenListe();
+            ResAutoDTKey.ItemsSource = DataBase.AutoListe();
+        }
 
         private void AddRes(object sender, RoutedEventArgs e)
         {
