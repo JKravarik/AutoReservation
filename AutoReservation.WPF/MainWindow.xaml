@@ -27,7 +27,8 @@
 
         <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="20" Foreground="#713f5b" Margin="0,10">Auto Reservation</TextBlock>
 
-        <TabControl Grid.Row="1">
+        <!--SelectionChanged="TabControl_SelectionChanged"-->
+        <TabControl Grid.Row="1" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Kunde" Name="TabKunde">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -97,12 +98,12 @@
             <TabItem Header="Auto" Name="TabAuto" >
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="350"/> 
+                        <RowDefinition Height="350"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions> 
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition/> 
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <ListBox Name="AutoListe" Grid.Row="0" Grid.Column="0" 
                              ItemContainerStyle="{StaticResource SimpleListBoxItem}"
@@ -115,14 +116,14 @@
 
                     <Grid Name="AutoDetail" Grid.Column="1" Margin="5,5,5,10" IsEnabled="False" >
                         <Grid.RowDefinitions>
-                            <RowDefinition/> 
-                            <RowDefinition/> 
-                            <RowDefinition/> 
-                            <RowDefinition/> 
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="113"/> 
+                            <ColumnDefinition Width="113"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
@@ -143,29 +144,25 @@
                     </Grid>
 
                     <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions> 
+                        <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
-                            <ColumnDefinition/>  
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Button HorizontalAlignment="Center" Name="AutoHinzufügen" Grid.Column="0" Content="Auto hinzufügen" Click="AddCar" />
                         <Button HorizontalAlignment="Center" Name="AutoLöschen" Grid.Column="1" Content="Auto löschen" Click="RemoveCar" />
                     </Grid>
 
                     <Grid Grid.Row="1" Grid.Column="1">
-                        <Grid.ColumnDefinitions> 
+                        <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
-                            <ColumnDefinition/> 
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Button HorizontalAlignment="Center" Name="AutoEdit" Grid.Column="0" Content="Auto editieren" Click="EditCar" />
                         <Button HorizontalAlignment="Center" Name="AutoSpeichern" Grid.Column="1" Content="Speichern" Click="SaveCar" IsEnabled="False"/>
                     </Grid>
                 </Grid>
             </TabItem>
-
-
-
             <TabItem Header="Reservation" Name="TabReservation">
-                <Label MouseLeftButtonDown="TabReservation_Clicked">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="350"/> 
@@ -234,7 +231,7 @@
                         <Button HorizontalAlignment="Center" Name="ResSpeichern" Grid.Column="1" Content="Speichern" Click="SaveRes" IsEnabled="False"/>
                     </Grid>
                 </Grid>
-                </Label>
+                
             </TabItem>
         </TabControl>
     </Grid>

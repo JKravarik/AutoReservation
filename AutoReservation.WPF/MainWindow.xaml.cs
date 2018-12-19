@@ -53,8 +53,8 @@ namespace AutoReservation.WPF
                 this.DataContext = Reservation;
             }
 
-            ResKundeDTKey.ItemsSource = DataBase.KundenListe();
-            ResAutoDTKey.ItemsSource = DataBase.AutoListe();
+            //ResKundeDTKey.ItemsSource = DataBase.KundenListe();
+            //ResAutoDTKey.ItemsSource = DataBase.AutoListe();
         }
 
         private void AddCustomer(object sender, RoutedEventArgs e)
@@ -154,13 +154,6 @@ namespace AutoReservation.WPF
             DataContext = Auto;
         }
 
-
-        private void TabReservation_Clicked(object sender, MouseButtonEventArgs e)
-        {
-            ResKundeDTKey.ItemsSource = DataBase.KundenListe();
-            ResAutoDTKey.ItemsSource = DataBase.AutoListe();
-        }
-
         private void AddRes(object sender, RoutedEventArgs e)
         {
             ReservationDetail.IsEnabled = true;
@@ -238,6 +231,23 @@ namespace AutoReservation.WPF
             if(Reservation.Kunde != null)
             {
                 ResKundeDTKey.SelectedValue = Reservation.Kunde.Id;
+            }
+        }
+
+
+        private bool updateItemsource = true;
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string tabItem = ((sender as TabControl).SelectedItem as TabItem).Header as string;
+            if (tabItem == "Reservation" && updateItemsource)
+            {
+                ResKundeDTKey.ItemsSource = DataBase.KundenListe();
+                ResAutoDTKey.ItemsSource = DataBase.AutoListe();
+                updateItemsource = false;
+            }
+            else if(tabItem != "Reservation")
+            {
+                updateItemsource = true;
             }
         }
     }
