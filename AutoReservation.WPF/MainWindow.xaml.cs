@@ -40,6 +40,8 @@ namespace AutoReservation.WPF
             listingAutoDataView = (CollectionViewSource)(this.Resources["listingAutoDataView"]);
             listingReservationDataView = (CollectionViewSource)(this.Resources["listingReservationDataView"]);
 
+            AutoKlasseDTKey.ItemsSource = Enum.GetValues(typeof(AutoKlasse));
+
             if (TabKunde.IsSelected)
             {
                 this.DataContext = Kunde;
@@ -52,9 +54,6 @@ namespace AutoReservation.WPF
             {
                 this.DataContext = Reservation;
             }
-
-            //ResKundeDTKey.ItemsSource = DataBase.KundenListe();
-            //ResAutoDTKey.ItemsSource = DataBase.AutoListe();
         }
 
         private void AddCustomer(object sender, RoutedEventArgs e)
@@ -112,6 +111,7 @@ namespace AutoReservation.WPF
             AutoSpeichern.IsEnabled = true;
             Auto = new AutoDto();
             DataContext = Auto;
+            AutoKlasseDTKey.SelectedItem = null;
         }
 
         private void RemoveCar(object sender, RoutedEventArgs e)
@@ -128,6 +128,13 @@ namespace AutoReservation.WPF
 
         private void SaveCar(object sender, RoutedEventArgs e)
         {
+            if (AutoKlasseDTKey.SelectedItem == null)
+            {
+                MessageBox.Show("Die Autoklasse muss ausgefüllt werden.");
+                return;
+            }
+            Auto.AutoKlasse = (AutoKlasse)AutoKlasseDTKey.SelectedItem;
+
             if (Auto.Id > 0)
             {
                 DataBase.UpdateAuto(Auto);
@@ -146,6 +153,7 @@ namespace AutoReservation.WPF
             try
             {
                 Auto = (AutoDto)((System.Windows.Controls.Primitives.Selector)sender).SelectedItem;
+                AutoKlasseDTKey.SelectedItem = Auto.AutoKlasse;
             }
             catch
             {

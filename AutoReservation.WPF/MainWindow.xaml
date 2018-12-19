@@ -134,7 +134,7 @@
                         <TextBox Name="AutoMarkeDTKey" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Marke}"/>
 
                         <TextBlock Grid.Row="2" Grid.Column="0" >Klasse:</TextBlock>
-                        <TextBox Name="AutoKlasseDTKey" Grid.Row="2" Grid.Column="1" Text="{Binding Path=AutoKlasse}"/>
+                        <ComboBox Name="AutoKlasseDTKey" Grid.Row="2" Grid.Column="1" />
 
                         <TextBlock Grid.Row="3" Grid.Column="0" >Tagestarif in CHF:</TextBlock>
                         <TextBox Name="AutoTagesTarifDTKey" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Tagestarif}"/>
