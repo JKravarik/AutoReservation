@@ -60,8 +60,11 @@ namespace AutoReservation.WPF
         {
             KundenDetail.IsEnabled = true;
             KundeSpeichern.IsEnabled = true;
-            KundeEdit.IsEnabled = false;
+            KundenListe.IsEnabled = false;
+            TabAuto.IsEnabled = false;
+            TabReservation.IsEnabled = false;
             KundeHinzufügen.IsEnabled = false;
+            KundeEdit.IsEnabled = false;
             Kunde = new KundeDto();
             DataContext = Kunde;
         }
@@ -70,12 +73,26 @@ namespace AutoReservation.WPF
         {
             DataBase.RemoveKunde(Kunde);
             DataApp.LoadCustomerData();
+            KundenListe.IsEnabled = true;
+            TabAuto.IsEnabled = true;
+            TabReservation.IsEnabled = true;
+            KundeSpeichern.IsEnabled = false;
+            KundeLöschen.IsEnabled = false;
+            KundenDetail.IsEnabled = false;
+            KundeHinzufügen.IsEnabled = true;
+            KundeEdit.IsEnabled = true;
         }
 
         private void EditCustomer (object sender, RoutedEventArgs e)
         {
             KundenDetail.IsEnabled = true;
             KundeSpeichern.IsEnabled = true;
+            KundeLöschen.IsEnabled = true;
+            KundenListe.IsEnabled = false;
+            TabAuto.IsEnabled = false;
+            TabReservation.IsEnabled = false;
+            KundeHinzufügen.IsEnabled = false;
+            KundeEdit.IsEnabled = false;
         }
 
         private void SaveCustomer(object sender, RoutedEventArgs e)
@@ -89,8 +106,14 @@ namespace AutoReservation.WPF
                 DataBase.AddKunde(Kunde);
             }
             DataApp.LoadCustomerData();
+            KundenListe.IsEnabled = true;
+            TabAuto.IsEnabled = true;
+            TabReservation.IsEnabled = true;
             KundeSpeichern.IsEnabled = false;
+            KundeLöschen.IsEnabled = false;
             KundenDetail.IsEnabled = false;
+            KundeHinzufügen.IsEnabled = true;
+            KundeEdit.IsEnabled = true;
         }
 
         private void KundenListe_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -111,6 +134,11 @@ namespace AutoReservation.WPF
         {
             AutoDetail.IsEnabled = true;
             AutoSpeichern.IsEnabled = true;
+            AutoListe.IsEnabled = false;
+            TabKunde.IsEnabled = false;
+            TabReservation.IsEnabled = false;
+            AutoHinzufügen.IsEnabled = false;
+            AutoEdit.IsEnabled = false;
             Auto = new AutoDto();
             DataContext = Auto;
             AutoKlasseDTKey.SelectedItem = null;
@@ -120,12 +148,26 @@ namespace AutoReservation.WPF
         {
             DataBase.RemoveAuto(Auto);
             DataApp.LoadAutoData();
+            AutoListe.IsEnabled = true;
+            TabKunde.IsEnabled = true;
+            TabReservation.IsEnabled = true;
+            AutoSpeichern.IsEnabled = false;
+            AutoLöschen.IsEnabled = false;
+            AutoDetail.IsEnabled = false;
+            AutoHinzufügen.IsEnabled = true;
+            AutoEdit.IsEnabled = true;
         }
 
         private void EditCar(object sender, RoutedEventArgs e)
         {
             AutoDetail.IsEnabled = true;
             AutoSpeichern.IsEnabled = true;
+            AutoLöschen.IsEnabled = true;
+            AutoListe.IsEnabled = false;
+            TabKunde.IsEnabled = false;
+            TabReservation.IsEnabled = false;
+            AutoHinzufügen.IsEnabled = false;
+            AutoEdit.IsEnabled = false;
         }
 
         private void SaveCar(object sender, RoutedEventArgs e)
@@ -146,8 +188,14 @@ namespace AutoReservation.WPF
                 DataBase.AddAuto(Auto);
             }
             DataApp.LoadAutoData();
+            AutoListe.IsEnabled = true;
+            TabKunde.IsEnabled = true;
+            TabReservation.IsEnabled = true;
             AutoSpeichern.IsEnabled = false;
+            AutoLöschen.IsEnabled = false;
             AutoDetail.IsEnabled = false;
+            AutoHinzufügen.IsEnabled = true;
+            AutoEdit.IsEnabled = true;
         }
 
         private void AutoListe_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -168,6 +216,11 @@ namespace AutoReservation.WPF
         {
             ReservationDetail.IsEnabled = true;
             ResSpeichern.IsEnabled = true;
+            ReservationListe.IsEnabled = false;
+            TabKunde.IsEnabled = false;
+            TabAuto.IsEnabled = false;
+            ResHinzufügen.IsEnabled = false;
+            ResEdit.IsEnabled = false;
             Reservation = new ReservationDto();
             DataContext = Reservation;
             ResAutoDTKey.SelectedItem = null;
@@ -178,12 +231,26 @@ namespace AutoReservation.WPF
         {
             DataBase.RemoveReservation(Reservation);
             DataApp.LoadReservationData();
+            ReservationListe.IsEnabled = true;
+            TabKunde.IsEnabled = true;
+            TabAuto.IsEnabled = true;
+            ResSpeichern.IsEnabled = false;
+            ResLöschen.IsEnabled = false;
+            ReservationDetail.IsEnabled = false;
+            ResHinzufügen.IsEnabled = true;
+            ResEdit.IsEnabled = true;
         }
 
         private void EditRes(object sender, RoutedEventArgs e)
         {
             ReservationDetail.IsEnabled = true;
             ResSpeichern.IsEnabled = true;
+            ResLöschen.IsEnabled = true;
+            ReservationListe.IsEnabled = false;
+            TabKunde.IsEnabled = false;
+            TabAuto.IsEnabled = false;
+            ResHinzufügen.IsEnabled = false;
+            ResEdit.IsEnabled = false;
         }
 
         private void SaveRes(object sender, RoutedEventArgs e)
@@ -204,8 +271,14 @@ namespace AutoReservation.WPF
                 DataBase.AddReservation(Reservation);
             }
             DataApp.LoadReservationData();
+            ReservationListe.IsEnabled = true;
+            TabKunde.IsEnabled = true;
+            TabAuto.IsEnabled = true;
             ResSpeichern.IsEnabled = false;
+            ResLöschen.IsEnabled = false;
             ReservationDetail.IsEnabled = false;
+            ResHinzufügen.IsEnabled = true;
+            ResEdit.IsEnabled = true;
         }
 
         private bool IsResSaveable()

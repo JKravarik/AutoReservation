@@ -20,6 +20,9 @@
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#D3D3D3"/>
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -95,6 +98,7 @@
 
         <Style TargetType="{x:Type ListBox}">
             <Setter Property="Background" Value="MistyRose"/>
+            <Setter Property="Foreground" Value="#6b0053"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="#985d7f"/>
         </Style>
@@ -116,7 +120,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
 
     </Application.Resources>
 </Application>

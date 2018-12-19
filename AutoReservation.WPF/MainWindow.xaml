@@ -81,12 +81,12 @@
                             <ColumnDefinition/> 
                         </Grid.ColumnDefinitions>
                         <Button HorizontalAlignment="Center" Name="KundeHinzufügen" Grid.Column="0" Content="Kunde hinzufügen" Click="AddCustomer" />
-                        <Button HorizontalAlignment="Center" Name="KundeLöschen" Grid.Column="1" Content="Kunde löschen" Click="RemoveCustomer" />
+                        <Button HorizontalAlignment="Center" Name="KundeEdit" Grid.Column="1" Content="Kunde editieren" Click="EditCustomer"/>
                     </Grid>
 
                     <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Margin="244,0,0,0">
                         <Grid.ColumnDefinitions> <ColumnDefinition/><ColumnDefinition/> </Grid.ColumnDefinitions>
-                        <Button HorizontalAlignment="Center" Name="KundeEdit" Grid.Column="0" Content="Kunde editieren" Click="EditCustomer" />
+                        <Button HorizontalAlignment="Center" Name="KundeLöschen" Grid.Column="0" Content="Kunde löschen" Click="RemoveCustomer" IsEnabled="False"/>
                         <Button HorizontalAlignment="Center" Name="KundeSpeichern" Grid.Column="1" Content="Speichern" Click="SaveCustomer" IsEnabled="False"/>
                     </Grid>
                 </Grid>
@@ -148,7 +148,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Button HorizontalAlignment="Center" Name="AutoHinzufügen" Grid.Column="0" Content="Auto hinzufügen" Click="AddCar" />
-                        <Button HorizontalAlignment="Center" Name="AutoLöschen" Grid.Column="1" Content="Auto löschen" Click="RemoveCar" />
+                        <Button HorizontalAlignment="Center" Name="AutoEdit" Grid.Column="1" Content="Auto editieren" Click="EditCar" />
                     </Grid>
 
                     <Grid Grid.Row="1" Grid.Column="1">
@@ -156,7 +156,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Button HorizontalAlignment="Center" Name="AutoEdit" Grid.Column="0" Content="Auto editieren" Click="EditCar" />
+                        <Button HorizontalAlignment="Center" Name="AutoLöschen" Grid.Column="0" Content="Auto löschen" Click="RemoveCar" IsEnabled="False"/>
                         <Button HorizontalAlignment="Center" Name="AutoSpeichern" Grid.Column="1" Content="Speichern" Click="SaveCar" IsEnabled="False"/>
                     </Grid>
                 </Grid>
@@ -218,7 +218,7 @@
                             <ColumnDefinition/> 
                         </Grid.ColumnDefinitions>
                         <Button HorizontalAlignment="Center" Name="ResHinzufügen" Grid.Column="0" Content="Reservation hinzufügen" Click="AddRes" />
-                        <Button HorizontalAlignment="Center" Name="ResLöschen" Grid.Column="1" Content="Reservation löschen" Click="RemoveRes" />
+                        <Button HorizontalAlignment="Center" Name="ResEdit" Grid.Column="1" Content="Reservation editieren" Click="EditRes"/>
                     </Grid>
 
                     <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="365.5,0,0,0">
@@ -226,7 +226,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/> 
                         </Grid.ColumnDefinitions>
-                        <Button HorizontalAlignment="Center" Name="ResEdit" Grid.Column="0" Content="Reservation editieren" Click="EditRes" />
+                        <Button HorizontalAlignment="Center" Name="ResLöschen" Grid.Column="0" Content="Reservation löschen" Click="RemoveRes" IsEnabled="False"/>
                         <Button HorizontalAlignment="Center" Name="ResSpeichern" Grid.Column="1" Content="Speichern" Click="SaveRes" IsEnabled="False"/>
                     </Grid>
                 </Grid>
