@@ -98,6 +98,6 @@ namespace AutoReservation.Common.DataTransferObjects
         }
 
         public override string ToString()
-            => $"{ReservationsNr}; {Von}; {Bis}; {Auto}; {Kunde}";
+            => $"{ReservationsNr}: {Kunde} - {Auto}";
     }
 }

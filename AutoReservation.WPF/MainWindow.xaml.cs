@@ -298,14 +298,9 @@ namespace AutoReservation.WPF
 
         private void ResListe_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
-            {
                 Reservation = (ReservationDto)((System.Windows.Controls.Primitives.Selector)sender).SelectedItem;
-            }
-            catch
-            {
-                Reservation = new ReservationDto();
-            }
+            if (Reservation == null) return;
+
             DataContext = Reservation;
             if(Reservation.Auto != null)
             {
